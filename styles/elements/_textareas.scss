@@ -1,0 +1,13 @@
+@use '../variables' as *;
+
+textarea {
+  font-family: $utilityText;
+  min-height: 10rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  line-height: 1.15 !important;
+
+  &.code-editor {
+    font-family: $monoText;
+  }
+}

@@ -1,0 +1,232 @@
+@use '../variables' as *;
+@use 'sass:math';
+
+.breadcrumbs {
+  list-style-type: none;
+  margin-left: 0;
+
+  li {
+    display: inline-block;
+    margin-right: 0.2rem;
+
+    &:not(:last-child):after {
+      content: "";
+      display: inline-block;
+      width: $lineHeight * 1.3;
+      height: $lineHeight;
+      background-image: url(icons/chevron-down.svg);
+      color: $mainLine;
+      font-size: 1.3em;
+      display: inline-block;
+      transform-origin: center center;
+      transform: rotate(-90deg);
+      position: relative;
+      top: 0.5em;
+      left: -0.2em;
+    }
+  }
+
+  &.knobs {
+    display: inline-flex;
+    background: linear-gradient(180deg,
+        transparent calc(50% - 1px),
+        $mainLine calc(50%),
+        transparent calc(50% + 1px));
+
+    li {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:after {
+        content: none;
+      }
+
+      &:last-child {
+        font-family: $utilityText;
+        height: $inputHeight;
+        line-height: $inputHeight;
+        padding: 0 1em;
+        margin: 0 0 0.4rem 0;
+        text-decoration: none;
+        border-radius: 6px;
+        background-color: $blue;
+        color: $white;
+        border: 1px solid $blue;
+      }
+    }
+  }
+
+  &.steps {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: stretch;
+    background: linear-gradient(180deg,
+        transparent calc(50% - 1px),
+        $mainLine calc(50%),
+        transparent calc(50% + 1px));
+
+    li {
+      margin-right: 3em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:after {
+        content: none;
+      }
+
+      &>*,
+      &.active>* {
+        border-radius: 6px;
+        border-right-width: 1px;
+        height: auto;
+        line-height: 1em;
+        padding: 0.5em 1.5em 1.5em;
+        text-decoration: none;
+      }
+
+      &>* {
+        background-color: $mainBackgroundLite;
+        border: 1px solid $mainLine;
+
+        &>.icon {
+          fill: $mainVague;
+        }
+      }
+
+      &>a:hover {
+        background-color: $mainBackgroundLiteHover;
+
+        &>.icon {
+          fill: $mainVague;
+        }
+      }
+
+      &>a:focus {
+        background-color: $mainBackgroundLiteHover;
+        box-shadow: 0 0 0 2px $mainLine;
+        outline-width: 0;
+
+        &>.icon {
+          fill: $mainVague;
+        }
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-top: math.div($paragraphSpacer, 2);
+        margin-bottom: 0.2em;
+        white-space: nowrap;
+      }
+
+      &.active>* {
+        background-color: $blue;
+        color: $white;
+        border-color: $blue;
+
+        &>.icon {
+          fill: $white;
+        }
+      }
+    }
+
+    @media (min-width: 680px) and (max-width: 900px) {
+      &>li {
+        margin-right: 1em;
+
+        &>*,
+        &.active>* {
+          padding: 0 0.75em 0.75em 0.75em;
+        }
+      }
+    }
+
+    @media (max-width: 679px) {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(90deg,
+          transparent calc(50% - 1px),
+          $mainLine calc(50%),
+          transparent calc(50% + 1px));
+
+      &>li {
+        margin-right: 0;
+        margin-bottom: 1em;
+        flex-direction: row;
+        align-content: left;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &>* {
+          padding-right: 4em;
+        }
+      }
+    }
+
+    &.icons {
+      li {
+        &>* {
+          position: relative;
+          padding-left: 4.65em;
+
+          &>.icon {
+            position: absolute;
+            top: 1em;
+            left: 1em;
+            width: 3em;
+            height: 3em;
+          }
+        }
+      }
+
+      @media (min-width: 680px) and (max-width: 900px) {
+        li {
+          &>* {
+            padding-left: 0.75em;
+
+            &>.icon {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    &.vertical {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: linear-gradient(90deg,
+          transparent calc(2em - 1px),
+          $mainLine calc(2em),
+          transparent calc(2em + 1px));
+
+      &>li {
+        margin-right: 0;
+        margin-bottom: 1em;
+        flex-direction: row;
+        align-content: left;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &>* {
+          padding-right: 4em;
+        }
+      }
+    }
+  }
+}

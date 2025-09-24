@@ -1,0 +1,253 @@
+@use '../variables' as *;
+
+$imageWidth: 12%;
+$printGap: 7pt;
+
+#pdf-renderer {
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+
+  .products.print {
+    font-size: 9.5pt;
+    line-height: 13pt;
+
+    .controls {
+      display: none;
+    }
+
+    .product {
+      padding: 9mm 0 17mm;
+      margin: 0;
+      page-break-inside: avoid;
+      display: block;
+      overflow: hidden;
+      border-bottom-width: 0;
+
+      .tag.classification-source {
+        display: none;
+      }
+
+      .tag.classification-identifier {
+        position: relative;
+        top: 4px;
+      }
+
+      .product-image {
+        width: $imageWidth;
+        height: 100%;
+        float: left;
+
+        &>div {
+          background-image: none !important;
+        }
+      }
+
+      .product-title {
+        margin: 0 0 $printGap $imageWidth;
+        padding-left: 2 * $printGap;
+        font-size: 11pt;
+      }
+
+      .product-metadata {
+        margin: 0 0 $printGap $imageWidth;
+        padding-left: 2 * $printGap;
+        font-size: 9.5pt;
+        line-height: 13pt;
+
+        dl {
+          dt {
+            flex: 0 0 20%;
+          }
+
+          dd {
+            flex: 0 0 80%;
+
+            .price-row {
+              display: inline;
+              margin-right: 0.8em;
+
+              &.erasmus {
+                display: none;
+              }
+
+              .price {
+                text-decoration: none !important;
+              }
+            }
+          }
+        }
+      }
+
+      .product-summary {
+        margin-bottom: $printGap !important;
+        font-size: 9.5pt;
+        line-height: 13pt;
+      }
+
+      .product-summary.erasmus {
+        margin: $printGap 0 $printGap $imageWidth;
+        padding-left: 2 * $printGap;
+      }
+
+      .product-summary:not(.erasmus) {
+        margin: 0 0 $printGap $imageWidth;
+        padding-left: 2 * $printGap;
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .product-organisation {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 7mm;
+        border-bottom: 1px solid rgba($mainLine, 0.6);
+        margin: 0;
+        padding: 1mm 0;
+
+        dt {
+          display: none;
+        }
+
+        dd {
+          flex: 1 0 auto;
+          opacity: 0.85;
+          padding-right: 1em;
+
+          &>span {
+            display: inline-block;
+            max-width: 23ch;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .org-url {
+            display: none;
+          }
+
+          &:last-child {
+            flex-grow: 999;
+            padding-right: 0;
+            text-align: right;
+          }
+        }
+      }
+
+      .product-print-footer {
+        display: flex;
+        border-top: 1px solid rgba($mainLine, 0.6);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 3em;
+        padding: 3pt 0 0;
+        background-color: $mainBackground;
+        z-index: 999;
+
+        &>div {
+          // display: inline-block;
+          width: 30%;
+          opacity: 0.85;
+
+          img {
+            height: 2em;
+          }
+        }
+
+        &>address {
+          vertical-align: top;
+          // font-size: 7pt;
+          // line-height: 10pt;
+          font-style: normal;
+          width: 70%;
+          // padding-left: 2 * $printGap;
+          opacity: 0.85;
+          text-align: right;
+
+          // & > strong {
+          // 	display: block;
+          // }
+
+          // & > div {
+          // 	display: inline-block;
+
+          // 	&:last-child {
+          // 		padding-left: 2 * $printGap;
+          // 	}
+          // }
+        }
+      }
+
+      form {
+        display: none !important;
+      }
+    }
+
+    // A4 dimensions = 210mm x 297mm
+    &.a4 {
+      .product {
+        height: 277mm;
+        max-height: 277mm;
+      }
+    }
+
+    // A5 landscape dimensions = 210mm x 148mm
+    &.a5 {
+      .product {
+        height: 128mm;
+        max-height: 128mm;
+        padding-bottom: 15mm;
+
+        .product-classification-dd>span>span:first-child {
+          max-width: 50ch;
+          // overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .product-classification-dd .tag.classification-subject {
+          white-space: nowrap;
+        }
+
+        .classification-identifier {
+          border-width: 0 !important;
+          padding: 0 !important;
+          font-size: 9.5pt;
+          line-height: 13pt;
+          font-weight: bold;
+          color: #000;
+          text-decoration: underline dotted #aaa;
+          top: 0;
+        }
+
+        .product-summary {
+          -webkit-line-clamp: 4;
+
+          &:not(.product-summary-0),
+          &.erasmus {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+
+  .erasmus-nts,
+  .tag.blue {
+    display: none;
+  }
+}
+
+body.print {
+
+  &>header,
+  &>footer {
+    display: none;
+  }
+}

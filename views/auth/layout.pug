@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,300i,400,400i,700,700i|IBM+Plex+Sans:300,300i,400,400i,500,500i,700,700i|IBM+Plex+Serif:300,300i,400,400i,700,700i")
+    link(rel="stylesheet", href="/styles/polly-" + (theme || "light") + ".min.css")
+    link(rel="icon", href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>" + (icon || "🦸") + "</text></svg>")
+    block title
+      title Polly Authentication
+  body
+    if error
+      div.notification.sticky.red(role="alert")
+        p= error
+    main#authentication
+      div.authentication-wrapper(style="text-align: center")
+        img(src="/images/face.svg", width="120", height="120")
+        block content

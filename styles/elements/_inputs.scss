@@ -1,0 +1,277 @@
+@use '../variables' as *;
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+input:not([type]),
+textarea,
+select,
+.input-container {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: $inputBackground;
+  color: $inputText;
+  font-family: $utilityText;
+  font-size: $inputFontSize;
+  border: 1px solid $inputLine;
+  border-radius: 6px;
+  outline-width: 0;
+  height: $inputHeight;
+  line-height: $inputHeight;
+  padding: $inputPadding;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: bottom;
+  box-shadow: 0 0 0 0 $inputLineHover inset;
+
+  &:hover {
+    border-color: $inputLineHover;
+  }
+
+  &:focus {
+    border-color: $inputLineHover;
+    box-shadow: 0 0 0 2px $inputLineHover inset;
+    outline-width: 0;
+  }
+
+  &:active,
+  &.active {
+    border-color: $inputLineActive;
+    box-shadow: 0 0 0 2px $inputLineActive inset;
+    outline-width: 0;
+  }
+
+  &:disabled {
+    color: $inputVague;
+    background-color: $inputBackgroundDisabled;
+
+    &:hover {
+      cursor: not-allowed;
+      border-color: $inputVague;
+    }
+  }
+
+  &[readonly] {
+    color: $inputText;
+    background-color: $inputBackground;
+
+    &:hover {
+      cursor: not-allowed;
+      border-color: $inputVague;
+    }
+  }
+
+  &:invalid,
+  &.invalid {
+    border-color: $inputLineError;
+
+    &:focus {
+      border-color: $inputLineError;
+      box-shadow: 0 0 0 2px $inputLineError inset;
+      outline-width: 0;
+    }
+  }
+
+  &.invalid {
+    border-color: $inputLineError !important;
+    box-shadow: 0 0 0 2px $inputLineError inset !important;
+  }
+
+  &[required] {
+    border-color: $inputLine;
+    outline-width: 0;
+
+    &:hover {
+      border-color: $inputLineHover;
+
+      &:invalid,
+      &.invalid {
+        border-color: $inputLineError;
+
+        &:empty {
+          border-color: $inputLineHover;
+        }
+      }
+    }
+
+    &:focus {
+      border-color: $inputLineFocus;
+      box-shadow: 0 0 0 2px $inputLineFocus inset;
+
+      &:invalid,
+      &.invalid {
+        border-color: $inputLineError;
+        box-shadow: 0 0 0 2px $inputLineError inset;
+
+        &:empty {
+          border-color: $inputLineFocus;
+          box-shadow: 0 0 0 2px $inputLineFocus inset;
+        }
+      }
+    }
+
+    &:active {
+      border-color: $inputLineActive;
+      box-shadow: 0 0 0 2px $inputLineActive inset;
+
+      &:invalid,
+      &.invalid {
+        border-color: $inputLineError;
+        box-shadow: 0 0 0 2px $inputLineError inset;
+
+        &:empty {
+          border-color: $inputLineActive;
+          box-shadow: 0 0 0 2px $inputLineActive inset;
+        }
+      }
+    }
+  }
+}
+
+input[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.suggestions {
+  position: relative;
+  display: inline-flex;
+  margin-right: 0.4em;
+
+  &>*:not(.panel) {
+    flex: 1 0 auto;
+  }
+
+  &>.panel {
+    z-index: 2;
+    margin-bottom: 1em;
+    position: absolute;
+    top: 100%;
+    border-top-width: 0;
+    left: 0;
+    right: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    transform: translateY(-1em);
+    opacity: 0;
+    transition: 0.15s transform, 0.15s opacity;
+    pointer-events: none;
+  }
+
+  &>.group {
+    margin-bottom: 0;
+  }
+
+  &:focus-within,
+  &.focus-within {
+    &>.panel {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    &>*:first-child,
+    input,
+    .input-container {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    & .group *:last-child {
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  &.top {
+    &>.panel {
+      top: auto;
+      bottom: 100%;
+      margin-bottom: 0;
+      transform: translateY(1em);
+    }
+
+    &:focus-within,
+    &.focus-within {
+      &>.panel {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        border-width: 1px 1px 0 1px;
+        border-radius: 6px 6px 0 0;
+      }
+
+      input,
+      .input-container {
+        border-radius: 0 0 6px 6px !important;
+      }
+
+      .group {
+        &>*:first-child {
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
+          border-bottom-left-radius: 6px !important;
+        }
+
+        &>*:last-child {
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 6px !important;
+        }
+      }
+    }
+  }
+}
+
+.slider {
+  margin: 0 0 $paragraphSpacer 0;
+  padding: 0.5em 0;
+
+  .track {
+    background-color: $mainBackgroundLite;
+    border: 1px solid $mainLine;
+    border-radius: 4px;
+    min-height: 1rem;
+
+    &.track-1 {
+      background-image: repeating-linear-gradient(-45deg,
+          $blueActive,
+          $blueActive 1rem,
+          $blueActiveLite 1rem,
+          $blueActiveLite 2rem);
+    }
+  }
+
+  .thumb {
+    width: 1.8em;
+    height: 1.8em;
+    background-color: $grayBackground;
+    border: 1px solid $inputLine;
+    border-radius: 4px;
+    transform: translateY(-0.4em);
+    cursor: pointer;
+
+    &:hover {
+      background-color: $grayHover;
+    }
+
+    &:focus {
+      background-color: $grayHover;
+      border-color: $inputLineHover;
+      box-shadow: 0 0 0 2px $inputLineHover inset;
+      outline-width: 0;
+    }
+  }
+}

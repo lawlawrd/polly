@@ -1,0 +1,98 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+.user-avatar,
+.group-avatar {
+  &>.no-avatar {
+    font-family: $utilityText;
+    font-weight: 200;
+    font-size: 1em;
+    display: inline-block;
+    padding: 0em 0.4em;
+    text-decoration: none;
+    min-width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    text-align: center;
+    border-radius: 0.9em 0.9em;
+    padding: 0 0.3em;
+    margin-right: 0.6em;
+
+    &>.icon {
+      width: 1.3em;
+      height: 1.3em;
+      transform: translateY(0.25em);
+      fill: $mainBackground;
+    }
+  }
+
+  &>img {
+    vertical-align: bottom;
+    width: 1.8em;
+    height: 1.8em;
+    border-radius: 0.9em 0.9em;
+    object-fit: cover;
+    -o-object-fit: cover;
+    outline: 2px solid $blueHover;
+
+    &:hover,
+    &.hover {
+      outline-color: color.adjust($blueBorder, $lightness: -30%);
+    }
+  }
+}
+
+.user-avatar>.no-avatar,
+.group-avatar>.no-avatar {
+  color: $mainBackground;
+  background-color: $blueActive;
+  outline: 2px solid $blueHover;
+
+  &:hover,
+  &.hover {
+    background-color: color.adjust($blueActive, $lightness: 0.5%);
+    outline-color: color.adjust($blueBorder, $lightness: -30%);
+  }
+}
+
+.group-avatar {
+
+  &>.no-avatar,
+  &>img {
+    border-radius: 3px;
+  }
+}
+
+.user-suggestions.suggestions {
+  &>.panel {
+    padding: 0;
+
+    &>.display-list-toggle {
+      padding: 0.2em 0.7em;
+      border-bottom: 1px solid $mainLine;
+
+      &>a {
+        text-decoration: none;
+        color: $mainText;
+        padding: 0.2em 1em;
+        transform: translateY(2px);
+
+        &.active {
+          font-weight: bold;
+          background-color: $mainBackground;
+          display: inline-block;
+          margin: .5em .5em -2px .5em;
+          border-radius: 0.3em 0.3em 0 0;
+          border-width: 1px 1px 0 1px;
+          border-color: $mainLine;
+          border-style: solid;
+        }
+      }
+    }
+
+    &>ul {
+      padding: .7em;
+      background-color: $mainBackground;
+    }
+  }
+}

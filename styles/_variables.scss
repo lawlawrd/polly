@@ -1,0 +1,183 @@
+/* COLORS */
+$black: #111 !default;
+$white: #fff !default;
+
+/* MAIN COLORS */
+$mainBackground: $white !default;
+$mainBackgroundLite: #efefef !default;
+$mainBackgroundLiteHover: #e6e6e6 !default;
+$mainBackgroundAlt: #f8f8f8 !default;
+$mainText: $black !default;
+$mainVague: #777 !default;
+$mainHover: #999 !default;
+$mainLine: #c0c0c0 !default;
+
+/* MAIN COLORS */
+$asideBackground: #222 !default;
+$asideBackgroundLite: #333 !default;
+$asideBackgroundLiteHover: #444 !default;
+$asideBackgroundAlt: #191919 !default;
+$asideText: #fff !default;
+$asideVague: #aaa !default;
+$asideHover: #333 !default;
+$asideLine: #595959 !default;
+$asideInputBackground: #191919 !default;
+$asideInputBackgroundDisabled: #262626 !default;
+$asideInputText: #fff !default;
+$asideInputVague: #666 !default;
+$asideInputLine: #595959 !default;
+$asideInputLineHover: #5dade2 !default;
+$asideInputLineFocus: #2e8fc1 !default;
+$asideInputLineActive: #2c81ba !default;
+$asideInputLineError: #c0392b !default;
+
+/* ACCENT COLORS */
+$yellow: #ff0 !default;
+$yellowBackground: #fdf9e7 !default;
+$yellowBorder: #f7db6e !default;
+$yellowText: $black !default;
+$yellowHeader: #f1c40f !default;
+$yellowBorderSub: $yellowBorder !default;
+$yellowTextSub: $black !default;
+$yellowHover: #fbedb7 !default;
+$yellowActive: #f1c40f !default;
+$yellowActiveLite: #f2ca26 !default;
+$yellowActiveText: $white !default;
+
+$blue: #2980d7 !default;
+$darkblue: #154360 !default;
+$blueBackground: #e6f2ff !default;
+$blueBorder: #68a6e3 !default;
+$blueText: $black !default;
+$blueHeader: #66b0ff !default;
+$blueBorderSub: $blueBorder !default;
+$blueTextSub: $black !default;
+$blueHover: #b3d7ff !default;
+$blueActive: #2980d7 !default;
+$blueActiveLite: #3d8cdb !default;
+$blueActiveText: $white !default;
+
+$red: #c00 !default;
+$redBackground: #f5d9d6 !default;
+$redBorder: #da7c71 !default;
+$redText: $black !default;
+$redHeader: #ff8080 !default;
+$redBorderSub: $redBorder !default;
+$redTextSub: $black !default;
+$redHover: #eab4ae !default;
+$redActive: #cb4335 !default;
+$redActiveLite: #d05649 !default;
+$redActiveText: $white !default;
+
+$green: #28b463 !default;
+$greenBackground: #d5f6e3 !default;
+$greenBorder: #29bc67 !default;
+$greenText: $black !default;
+$greenHeader: #28b463 !default;
+$greenBorderSub: $greenBorder !default;
+$greenTextSub: $black !default;
+$greenHover: #abedc7 !default;
+$greenActive: #28b463 !default;
+$greenActiveLite: #29bc67 !default;
+$greenActiveText: $white !default;
+
+$purpleBackground: #e6ccff !default;
+$purpleBorder: #bf80ff !default;
+$purpleText: $black !default;
+$purpleHeader: #9933ff !default;
+$purpleBorderSub: $purpleBorder !default;
+$purpleTextSub: $black !default;
+$purpleHover: #d9b3ff !default;
+$purpleActive: #9933ff !default;
+$purpleActiveLite: #a64dff !default;
+$purpleActiveText: $white !default;
+
+$orangeBackground: #ffe0cc !default;
+$orangeBorder: #ffa366 !default;
+$orangeText: $black !default;
+$orangeHeader: #ff8c66 !default;
+$orangeBorderSub: $orangeBorder !default;
+$orangeTextSub: $black !default;
+$orangeHover: #ffd1b3 !default;
+$orangeActive: #d35400 !default;
+$orangeActiveLite: #e65c00 !default;
+$orangeActiveText: $white !default;
+
+$gray: #aaa !default;
+$grayBackground: $mainBackgroundLite !default;
+$grayBorder: $mainLine !default;
+$grayText: #2573a7 !default;
+$grayHeader: $mainVague !default;
+$grayBorderSub: $grayBorder !default;
+$grayTextSub: $black !default;
+$grayHover: $mainBackgroundLiteHover !default;
+$grayActive: $blue !default;
+$grayActiveText: $white !default;
+
+/* TYPOGRAPHY */
+$blockText: "IBM Plex Serif", Georgia, serif;
+$utilityText: "IBM Plex Sans", Calibri, Arial, Verdana, sans-serif;
+$monoText: "IBM Plex Mono", monospace;
+
+$fontFamily: $blockText;
+$fontSize: 15px;
+$lineHeight: $fontSize * 1.4;
+$paragraphSpacer: $lineHeight * 0.75;
+
+/* HEADER */
+$headerBackground: #efefef !default;
+$headerText: $black !default;
+$headerLine: #e6e6e6 !default;
+$headerHeight: 55px;
+
+/* ASIDE */
+$asideBackground: #e6e6e6 !default;
+$asideLine: #c8c8c8 !default;
+
+/* LINKS */
+$linkColor: #2573a7 !default;
+$linkLine: #3498db !default;
+$linkHover: $mainText !default;
+$linkActive: $mainText !default;
+$linkVisited: #8e44ad !default;
+
+/* INPUT */
+$inputFontSize: 1em;
+$inputHeight: 2.6em;
+$inputPaddingWidth: 0.6em;
+$inputPaddingHeight: 0;
+$inputPadding: $inputPaddingHeight $inputPaddingWidth;
+$inputBackground: $mainBackground !default;
+$inputBackgroundDisabled: #ddd !default;
+$inputText: $mainText !default;
+$inputVague: #666 !default;
+$inputLine: $mainLine !default;
+$inputLineHover: #5dade2 !default;
+$inputLineFocus: #2e8fc1 !default;
+$inputLineActive: #2c81ba !default;
+$inputLineError: #c0392b !default;
+
+/* BUTTONS */
+$buttonFontSize: 1em;
+$buttonHeight: 2.6em;
+$buttonPadding: 0 1.2em 5px;
+$buttonShadowSize: 3px;
+$buttonBackground: #e5e8e8 !default;
+$buttonText: $mainText !default;
+$buttonTextDisabled: #75828a !default;
+$buttonLine: #a0aaab !default;
+$buttonHover: #d7dbdd !default;
+$buttonFocus: #d7dbdd !default;
+$buttonActive: #c8cdd0 !default;
+$buttonDisabled: #c9cfcf !default;
+$buttonShadow: #bbc3c3 !default;
+$buttonPulseHigh: #bbc2c3 !default;
+$buttonPulseLow: #e4e7e7 !default;
+$buttonRefresh: url(../images/refresh-black.svg) !default;
+$buttonCheck: url(../images/check-black.svg) !default;
+
+/* MARK */
+$markBackground: rgba(#fed330, 0.3) !default;
+$markBackgroundAlt: rgba(#fed330, 0.1) !default;
+
+$chevronHover: url(/images/chevron-down-blue.svg);

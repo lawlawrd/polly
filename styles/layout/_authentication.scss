@@ -1,0 +1,26 @@
+@use "../variables" as *;
+
+main#authentication {
+  min-height: 100vh;
+  min-width: 100vw;
+  position: relative;
+  font-family: $utilityText;
+
+  .authentication-wrapper {
+    position: absolute;
+    width: 40ch;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    & > h1,
+    & > p {
+      text-align: center;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+}

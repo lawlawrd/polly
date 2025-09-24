@@ -1,0 +1,123 @@
+@use '../variables' as *;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &>.panel {
+    box-shadow: 2px 2px 5px rgba($black, 0.5);
+    max-width: 90vw;
+
+    &.arrow {
+      position: absolute;
+      z-index: 25;
+      top: 100%;
+      left: 50%;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, 0em);
+      transition: opacity 0.2s, transform 0.2s;
+
+      &.top.left {
+        top: 100%;
+        transform: translate(-1em, 0);
+      }
+
+      &.top.center {
+        top: 100%;
+        transform: translate(-50%, 0);
+      }
+
+      &.top.right {
+        top: 100%;
+        transform: translate(calc(-100% + 1em), 0);
+      }
+
+      &.bottom.left {
+        top: auto;
+        bottom: 100%;
+        transform: translate(-1em, 1em);
+      }
+
+      &.bottom.center {
+        top: auto;
+        bottom: 100%;
+        transform: translate(-50%, 1em);
+      }
+
+      &.bottom.right {
+        top: auto;
+        bottom: 100%;
+        transform: translate(calc(-100% + 1em), 1em);
+      }
+    }
+  }
+
+  &>*:focus+&>.panel,
+  &>*:focus+&>.panel,
+  &>.panel:hover,
+  &:focus-within>.panel,
+  &.focus-within>.panel,
+  &.hover:hover>.panel,
+  &>.panel-down {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, 0.5em);
+
+    &.top.left {
+      transform: translate(-1em, 0.5em);
+    }
+
+    &.top.center {
+      transform: translate(-50%, 0.5em);
+    }
+
+    &.top.right {
+      transform: translate(calc(-100% + 1em), 0.5em);
+    }
+
+    &.bottom.left {
+      transform: translate(-1em, 0.5em);
+    }
+
+    &.bottom.center {
+      transform: translate(-50%, 0.5em);
+    }
+
+    &.bottom.right {
+      transform: translate(calc(-100% + 1em), 0.5em);
+    }
+  }
+}
+
+@supports (-webkit-overflow-scrolling: touch) {
+  .dropdown>*:hover+.panel {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, 0.5em);
+
+    &.top.left {
+      transform: translate(-1em, 0.5em);
+    }
+
+    &.top.center {
+      transform: translate(-50%, 0.5em);
+    }
+
+    &.top.right {
+      transform: translate(calc(-100% + 1em), 0.5em);
+    }
+
+    &.bottom.left {
+      transform: translate(-1em, 0.5em);
+    }
+
+    &.bottom.center {
+      transform: translate(-50%, 0.5em);
+    }
+
+    &.bottom.right {
+      transform: translate(calc(-100% + 1em), 0.5em);
+    }
+  }
+}

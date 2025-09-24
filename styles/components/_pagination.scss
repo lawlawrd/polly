@@ -1,0 +1,128 @@
+@use '../variables' as *;
+
+.pagination {
+  list-style-type: none;
+  display: inline-block;
+  font-family: $utilityText;
+  margin: 0 0.4rem 0.4rem 0;
+  padding: 0;
+
+  &>li {
+    display: inline-block;
+
+    &>*:not(.panel) {
+      display: block;
+      background-color: $mainBackground;
+      border-width: 1px 0 1px 1px;
+      border-style: solid;
+      border-color: $mainLine;
+      height: $inputHeight;
+      line-height: $inputHeight;
+      color: $linkColor;
+      padding: 0 1em;
+      margin: 0 -4px 0 0;
+      text-decoration: none;
+
+      &:disabled {
+        color: $mainVague;
+        background-color: $inputBackgroundDisabled;
+      }
+    }
+
+    &:first-child>* {
+      border-radius: 6px 0 0 6px;
+    }
+
+    &:last-child>* {
+      border-radius: 0 6px 6px 0;
+      border-width: 1px 1px 1px 1px;
+    }
+
+    &:first-child:last-child>* {
+      border-radius: 6px;
+    }
+
+    &>a:hover,
+    &>a.hover,
+    &>a:focus,
+    &.focus>a {
+      background-color: $mainBackgroundLiteHover;
+      color: $mainText;
+    }
+
+    &>a:focus {
+      outline-width: 0;
+      box-shadow: 0 0 0 2px $mainLine;
+    }
+
+    &>a:active,
+    &.active>* {
+      background-color: $linkColor;
+      color: $mainBackground;
+      border-color: $linkColor;
+    }
+
+    &>* svg {
+      width: 1.6em;
+      height: 1.6em;
+      fill: $linkColor;
+      position: relative;
+      top: 0.3em;
+    }
+
+    &>a:hover svg,
+    &.hover>a svg {
+      fill: $mainText;
+    }
+
+    &>a:active svg,
+    &.active>* svg {
+      fill: $mainBackground;
+    }
+
+    &>select {
+      border-radius: 0;
+    }
+  }
+
+  &.rounded li>*,
+  &.bullets li>* {
+    border-width: 1px;
+    min-width: 2.2em;
+    height: 2.2em;
+    line-height: 2em;
+    border-radius: 1.1em 1.1em;
+    margin-left: 0.5em;
+    padding: 0 0.7em;
+    text-align: center;
+  }
+
+  &.bullets {
+    font-size: 0.5em;
+
+    &>li>* {
+      height: 2.2em;
+      width: 1em;
+      line-height: 1em;
+      margin: 0 0.5em;
+      color: transparent;
+      background-color: $mainBackgroundLiteHover;
+      border-color: $mainBackgroundLiteHover;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        color: transparent;
+        background-color: $mainLine;
+        border-color: $mainLine;
+      }
+    }
+
+    &>li>*:active,
+    &>li.active>* {
+      color: transparent;
+      background-color: $blue;
+      border-color: $blue;
+    }
+  }
+}

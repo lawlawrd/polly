@@ -1,0 +1,159 @@
+@use '../variables' as *;
+
+dialog {
+  margin: $paragraphSpacer 0;
+  min-width: 20rem;
+  max-width: 80vw;
+  padding: 1.5rem 3rem 1.5rem 2rem;
+  border: 1px solid $mainLine;
+  border-radius: 6px;
+  background-color: $mainBackground;
+  color: $mainText;
+
+  &>h1,
+  &>h2,
+  &>h3,
+  &>h4,
+  &>h5,
+  &>h6 {
+    margin-top: 0;
+    text-align: left;
+  }
+
+  &[open] {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: showModal 0.3s ease normal;
+
+    &.hide {
+      animation: hideModal 0.3s ease normal;
+    }
+  }
+
+  &.inline {
+    display: block;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    animation: none;
+  }
+
+  .control.close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+
+    svg {
+      width: 1.7rem;
+      height: 1.7rem;
+      fill: $mainVague;
+    }
+
+    &:hover svg,
+    &:focus svg {
+      fill: $mainText;
+    }
+
+    &:active svg {
+      fill: $mainText;
+    }
+  }
+
+  footer {
+    display: flex;
+    flex-direction: row;
+    background-color: $mainBackgroundLite;
+    border-top: 1px solid $mainLine;
+    border-radius: 0 0 6px 6px;
+    padding: 0.5rem 1rem 0.2rem;
+    margin: 2rem -3rem -1.5rem -2rem;
+    line-height: $buttonHeight;
+
+    * {
+      flex-grow: 1;
+    }
+
+    .spacer {
+      flex-grow: 100;
+    }
+  }
+
+  &::backdrop,
+  &+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: showBackdrop 0.3s ease normal;
+  }
+
+  &.hide::backdrop,
+  &.hide+.backdrop {
+    animation: hideBackdrop 0.3s ease normal;
+  }
+
+  &.small {
+    width: 20rem;
+  }
+
+  &.medium {
+    width: 30rem;
+  }
+
+  &.wide {
+    width: 40rem;
+  }
+
+  &.full-width {
+    width: 100%;
+  }
+}
+
+@keyframes showModal {
+  0% {
+    opacity: 0;
+    top: 35%;
+  }
+
+  100% {
+    opacity: 1;
+    top: 40%;
+  }
+}
+
+@keyframes showBackdrop {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hideModal {
+  0% {
+    opacity: 1;
+    top: 40%;
+  }
+
+  100% {
+    opacity: 0;
+    top: 35%;
+  }
+}
+
+@keyframes hideBackdrop {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

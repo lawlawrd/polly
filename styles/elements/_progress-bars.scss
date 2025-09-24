@@ -1,0 +1,87 @@
+@use '../variables' as *;
+
+@mixin progressMixin($progressBarOne, $progressBarTwo) {
+  background-color: $mainBackgroundLite;
+  border: 1px solid $mainLine;
+
+  &::-moz-progress-bar {
+    background-image: repeating-linear-gradient(-45deg,
+        $progressBarOne,
+        $progressBarOne 1rem,
+        $progressBarTwo 1rem,
+        $progressBarTwo 2rem);
+  }
+
+  &::-webkit-progress-value {
+    background-image: repeating-linear-gradient(-45deg,
+        $progressBarOne,
+        $progressBarOne 1rem,
+        $progressBarTwo 1rem,
+        $progressBarTwo 2rem);
+  }
+}
+
+progress {
+  @include progressMixin($blueActive, $blueActiveLite);
+
+  display: inline-block;
+  width: 100%;
+  padding: 3px;
+  height: calc($lineHeight + 10px);
+  border-radius: 4px;
+  -webkit-appearance: none;
+
+  &:not([value])::-moz-progress-bar {
+    background-color: transparent;
+  }
+
+  &::-moz-progress-bar {
+    background-size: 200% 200%;
+    animation: progressAnimation 8s linear infinite;
+    border-radius: 2px;
+  }
+
+  &::-webkit-progress-value {
+    background-size: 200% 200%;
+    animation: progressAnimation 8s linear infinite;
+    border-radius: 2px;
+  }
+
+  &.blue {
+    @include progressMixin($blueActive, $blueActiveLite);
+  }
+
+  &.red {
+    @include progressMixin($redActive, $redActiveLite);
+  }
+
+  &.yellow {
+    @include progressMixin($yellowActive, $yellowActiveLite);
+  }
+
+  &.green {
+    @include progressMixin($greenActive, $greenActiveLite);
+  }
+
+  &.purple {
+    @include progressMixin($purpleActive, $purpleActiveLite);
+  }
+
+  &.orange {
+    @include progressMixin($orangeActive, $orangeActiveLite);
+  }
+
+  &.gray {
+    @include progressMixin($mainVague, #808080);
+  }
+}
+
+@keyframes progressAnimation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}

@@ -1,0 +1,26 @@
+@use '../variables' as *;
+
+#box__input,
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__button,
+.box__error {
+  display: none;
+  height: 100px;
+  text-align: center;
+}
+
+.box.has-advanced-upload {
+  background-color: white;
+  outline: 2px dashed black;
+  outline-offset: -10px;
+}
+
+.box.has-advanced-upload .box__dragndrop {
+  display: inline;
+}
+
+.box.is-dragover {
+  background-color: grey;
+}

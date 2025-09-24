@@ -1,0 +1,28 @@
+@use '../variables' as *;
+
+img {
+  max-width: 100%;
+}
+
+figure {
+  display: inline-block;
+  flex-direction: column;
+  border: 1px solid $mainLine;
+  overflow: hidden;
+  border-radius: 4px;
+  margin: $paragraphSpacer 0;
+  padding: 3px;
+  max-width: 100%;
+  background-color: $mainBackground;
+
+  img {
+    margin-bottom: -0.4em;
+  }
+
+  figcaption {
+    font-family: $utilityText;
+    font-size: 0.9em;
+    color: $mainVague;
+    padding: 0.5em 0.2em 0;
+  }
+}

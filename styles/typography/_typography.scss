@@ -1,0 +1,237 @@
+@use '../variables' as *;
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: $fontFamily;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $mainBackground;
+  color: $mainText;
+}
+
+p {
+  margin: $paragraphSpacer 0;
+
+  &.sample-text {
+    margin-bottom: calc($paragraphSpacer * 1.5);
+  }
+}
+
+hr {
+  border-width: 0 0 1px 0;
+  border-style: dashed;
+  border-color: $mainLine;
+  margin: $paragraphSpacer 0;
+
+  &.vertical {
+    border-width: 0 0 0 1px;
+    margin: 0 $paragraphSpacer;
+  }
+}
+
+u {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+blockquote {
+  border: 1px solid $mainLine;
+  border-radius: 6px;
+  padding: 1em;
+  background-color: $mainBackgroundLite;
+  margin: $paragraphSpacer 0;
+
+  &>*:first-child {
+    margin-top: 0;
+  }
+
+  footer {
+    font-size: 0.9em;
+    color: $mainVague;
+
+    &:before {
+      content: "\02015";
+    }
+  }
+
+  &.sample-text {
+    color: $mainLine;
+    padding-top: 0.5rem;
+  }
+}
+
+abbr,
+time {
+  background-color: transparent;
+  text-decoration: underline dotted $mainVague;
+  cursor: help;
+}
+
+mark.mark-bibliognost {
+  background-color: $markBackground;
+  box-shadow:
+    2px 0 0 0 $markBackground,
+    -2px 0 0 0 $markBackground;
+  background-size: 2000px 2000px;
+  background-image: repeating-linear-gradient(-45deg,
+      $markBackground,
+      $markBackground 5px,
+      $markBackgroundAlt 5px,
+      $markBackgroundAlt 15px);
+}
+
+del {
+  text-decoration: line-through solid $inputLineError;
+}
+
+code,
+kbd,
+samp {
+  font-family: $monoText;
+  font-size: 0.9em;
+  line-height: 1.1;
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+code {
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border: 1px solid #eed4db;
+}
+
+kbd {
+  color: $white;
+  background-color: $darkblue;
+  border: 1px solid $black;
+  white-space: nowrap;
+}
+
+samp {
+  color: #0f0;
+  background-color: #333;
+  border: 1px solid $black;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+  margin: $paragraphSpacer 0;
+}
+
+.sample-text {
+  color: $mainVague;
+  font-family: "BLOKK";
+  font-size: 2em;
+  word-spacing: -20px;
+}
+
+.price {
+  font-family: $utilityText;
+  border-bottom: 1px dotted $mainLine;
+}
+
+.fetching {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba($mainBackground, 0.9);
+  padding-top: 4em;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s opacity;
+  z-index: 2;
+
+  &.active {
+    opacity: 0.8;
+    pointer-events: auto;
+  }
+}
+
+.spinner {
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-55%);
+
+  &.inside {
+    width: 10em;
+    height: 10em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.spinner svg {
+  animation: rotate 1.5s linear infinite;
+  height: 100%;
+  width: 100%;
+}
+
+.spinner circle {
+  stroke: $linkColor;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite 0s;
+  fill: none;
+  stroke-width: 6;
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35;
+  }
+
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes color {
+
+  100%,
+  0% {
+    stroke: #4285f4;
+  }
+
+  25% {
+    stroke: #de3e35;
+  }
+
+  50% {
+    stroke: #f7c223;
+  }
+
+  75% {
+    stroke: #1da760;
+  }
+}

@@ -1,0 +1,351 @@
+@use '../variables' as *;
+
+.gallery {
+  list-style-type: none;
+  margin: $paragraphSpacer 0;
+  padding: 0;
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+
+  &>header {
+    grid-column: 1 / -1;
+  }
+
+  &>li {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+
+    &>a:focus {
+      box-shadow: 0 0 0 3px $inputLineHover;
+      outline-width: 0;
+    }
+
+    &>*,
+    &>a>* {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    figure {
+      margin: 0;
+
+      &>figcaption {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: $mainBackground;
+        padding-top: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &.ratio-3by4>li {
+    padding-top: 133.33333333333%;
+  }
+
+  &.ratio-9by16>li {
+    padding-top: 177.77777777778%;
+  }
+
+  &.ratio-golden-portrait>li {
+    padding-top: 161.803398875%;
+  }
+
+  &.ratio-4by3>li {
+    padding-top: 75%;
+  }
+
+  &.ratio-16by9>li {
+    padding-top: 56.25%;
+  }
+
+  &.ratio-golden-landscape>li {
+    padding-top: 61.803398874985%;
+  }
+
+  &.mini {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+
+  &.small {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  &.medium {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  &.large {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  &.big {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  &.huge {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  &.massive {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  &.enormous {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+
+  &.giant {
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  }
+
+  &.image-cover img,
+  img.image-cover {
+    object-fit: cover;
+    -o-object-fit: cover;
+  }
+
+  &.image-contain img,
+  img.image-contain {
+    object-fit: contain;
+    -o-object-fit: contain;
+    background-color: $mainBackgroundLite;
+  }
+
+  &.image-original img,
+  img.image-original {
+    object-fit: none;
+    -o-object-fit: none;
+    background-color: $mainBackgroundLite;
+  }
+
+  &.left-top img,
+  img.left-top {
+    object-position: 0 0;
+  }
+
+  &.left-center img,
+  img.left-center {
+    object-position: 0 50%;
+  }
+
+  &.left-bottom img,
+  img.left-bottom {
+    object-position: 0 100%;
+  }
+
+  &.center-top img,
+  img.center-top {
+    object-position: 50% 0;
+  }
+
+  &.center-center img,
+  img.center-center {
+    object-position: 50% 50%;
+  }
+
+  &.center-bottom img,
+  img.center-bottom {
+    object-position: 50% 100%;
+  }
+
+  &.right-top img,
+  img.right-top {
+    object-position: 100% 0;
+  }
+
+  &.right-center img,
+  img.right-center {
+    object-position: 100% 50%;
+  }
+
+  &.right-bottom img,
+  img.right-bottom {
+    object-position: 100% 100%;
+  }
+}
+
+.slideshow {
+  display: block;
+  position: relative;
+  text-align: center;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    padding-top: 100%;
+    margin-bottom: 0.2em;
+  }
+
+  &:focus-within {
+    box-shadow: 0 0 0 3px $inputLineHover;
+  }
+
+  &>li {
+    position: static;
+    display: inline-block;
+    padding: 0.1em !important;
+    width: auto;
+
+    &>input[type="radio"] {
+      opacity: 0;
+      pointer-events: none;
+
+      &+label {
+        display: block;
+        width: 0.8em;
+        height: 0.8em;
+        border-radius: 0.4em;
+        background-color: $mainBackgroundLiteHover;
+
+        &:hover {
+          background-color: $mainLine;
+        }
+      }
+
+      &:focus+label {
+        background-color: $blue;
+        box-shadow: 0 0 0 1px $blue;
+      }
+
+      &+label~* {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        transition: 0.2s opacity;
+      }
+    }
+
+    &>input[type="radio"]:checked {
+      &+label {
+        background-color: $blue;
+      }
+
+      &+label~* {
+        opacity: 1;
+        bottom: auto;
+        padding-top: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  &.with-thumbnails {
+    &>li {
+      &>input[type="radio"] {
+        &+label {
+          border-radius: 0;
+          width: 3em;
+          height: 3em;
+          background-color: transparent;
+          position: relative;
+          top: 0.1em;
+        }
+      }
+
+      &>input[type="radio"]:checked+label {
+        background-color: $blue;
+      }
+
+      &>input[type="radio"]:not(:checked)+label~* {
+        position: static;
+        display: block;
+        width: 3em;
+        height: 3em;
+        opacity: 1;
+        overflow: hidden;
+        pointer-events: none;
+        margin-top: -100%;
+
+        &>img {
+          position: static;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          -o-object-fit: cover;
+        }
+      }
+    }
+  }
+
+  &.mini {
+    width: 80px;
+  }
+
+  &.small {
+    width: 100px;
+  }
+
+  &.medium {
+    width: 120px;
+  }
+
+  &.large {
+    width: 140px;
+  }
+
+  &.big {
+    width: 180px;
+  }
+
+  &.huge {
+    width: 220px;
+  }
+
+  &.massive {
+    width: 300px;
+  }
+
+  &.enormous {
+    width: 400px;
+  }
+
+  &.giant {
+    width: 600px;
+  }
+
+  &.ratio-3by4::before,
+  &.ratio-3by4>li>input[type="radio"]:checked+label~* {
+    padding-top: 133.33333333333%;
+  }
+
+  &.ratio-9by16::before,
+  &.ratio-9by16>li>input[type="radio"]:checked+label~* {
+    padding-top: 177.77777777778%;
+  }
+
+  &.ratio-golden-portrait::before,
+  &.ratio-golden-portrait>li>input[type="radio"]:checked+label~* {
+    padding-top: 161.803398875%;
+  }
+
+  &.ratio-4by3::before,
+  &.ratio-4by3>li>input[type="radio"]:checked+label~* {
+    padding-top: 75%;
+  }
+
+  &.ratio-16by9::before,
+  &.ratio-16by9>li>input[type="radio"]:checked+label~* {
+    padding-top: 56.25%;
+  }
+
+  &.ratio-golden-landscape::before,
+  &.ratio-golden-landscape>li>input[type="radio"]:checked+label~* {
+    padding-top: 61.803398874985%;
+  }
+}

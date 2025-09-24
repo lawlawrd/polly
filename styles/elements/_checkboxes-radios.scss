@@ -1,0 +1,99 @@
+@use '../variables' as *;
+@use 'sass:math';
+
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+
+  &+label {
+    display: inline-block;
+    cursor: pointer;
+    line-height: $lineHeight * 1.2;
+    position: relative;
+    padding-left: 0.4em;
+    background-image: url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNMTk1djE0aDV2NWgxNG0wLTJoNWMtMS4xMC0yMC45LTIydjE0YzAxLjEuOTIyMmgxNGMxLjEwMi0wLjkyLTJ2NWMwLTEuMS0wLjktMi0yLTJ6JyBmaWxsPSclMjNlYWI0YWUnIC8+PHBhdGggZD0nTTAwaDI0djI0aDB6JyBmaWxsPSclMjNlYWI0YWUnIC8+PC9zdmc+");
+  }
+
+  &:focus+label {
+    text-decoration: underline dotted $mainVague;
+  }
+
+  &:disabled+label {
+    color: $mainVague;
+    cursor: not-allowed;
+  }
+}
+
+.checkbox-button {
+  &>input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &>.button {
+    padding: $buttonPadding;
+    line-height: math.div($buttonHeight, 1.15);
+    margin: 0;
+  }
+}
+
+.checkboxes,
+.radios {
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style-type: none;
+
+  &.inline li {
+    display: inline-block;
+    margin-right: 1em;
+  }
+
+  &.buttons {
+    margin-right: 0.4rem;
+    display: inline-flex;
+    vertical-align: bottom;
+
+    li {
+      margin: 0;
+      flex: 0 0 auto;
+      height: $buttonHeight;
+
+      .button {
+        padding: $buttonPadding;
+        line-height: math.div($buttonHeight, 1.1);
+        margin-left: 0;
+        margin-right: -1px;
+        margin-bottom: 0;
+        border-radius: 0;
+
+        &:before,
+        &:after {
+          display: none;
+        }
+      }
+
+      input[type="checkbox"],
+      input[type="radio"] {
+        position: absolute;
+        left: 0;
+        height: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      input[type="checkbox"]:focus+label.button,
+      input[type="radio"]:focus+label.button {
+        text-decoration: none;
+      }
+
+      &:first-child .button {
+        border-radius: 6px 0 0 6px;
+      }
+
+      &:last-child .button {
+        border-radius: 0 6px 6px 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+@use "../variables" as *;
+
+main#anonymizer {
+  display: grid;
+  grid-template-columns: 2fr 5fr 5fr;
+  min-height: 100vh;
+  padding: 0;
+
+  & > .anonymizer-input {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3.5em 1fr;
+    padding: 1rem;
+    margin: 0;
+    border-right: 1px solid $mainLine;
+
+    & > .header {
+      grid-row: 1 / 2;
+      font-family: $utilityText;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+
+      & > .spacer {
+        flex-grow: 99;
+      }
+
+      .help {
+        font-size: 0.8em;
+        transform: translateY(-.3em);
+        display: inline-block;
+      }
+    }
+
+    #anonymizer-editor {
+      grid-row: 2 / 3;
+
+      [contenteditable="true"] {
+        min-height: 30em;
+        max-height: 50em;
+      }
+    }
+  }
+
+  & > .anonymizer-results {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3.5em 1fr;
+    padding: 1rem;
+    position: relative;
+
+    & > .header {
+      font-family: $utilityText;
+      margin-bottom: 0.5rem;
+      display: flex;
+
+      & > .spacer {
+        flex-grow: 99;
+      }
+
+      & > .suggestions {
+        width: 35ch;
+      }
+    }
+
+    .pre-result {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+
+      & > .emoji {
+        font-size: 8rem;
+        display: block;
+        margin-bottom: 5rem;
+      }
+    }
+
+    .editor-content [contenteditable] {
+      min-height: 30em;
+      max-height: 50em;
+    }
+  }
+
+  & > .anonymizer-findings {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    padding: 1rem;
+    border-top: 1px solid $mainLine;
+
+    & > p {
+      text-align: center;
+    }
+
+    .code-cell {
+      white-space: normal;
+      word-break: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+  }
+
+  & > .anonymizer-settings {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    font-family: $utilityText;
+    padding-top: 1rem;
+
+    .threshold-control {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      input[type="range"] {
+        width: 100%;
+      }
+
+      output {
+        align-self: flex-end;
+        font-size: 0.9em;
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+        margin-top: -.4em;
+      }
+    }
+
+    .settings-help {
+      font-size: 0.7rem;
+    }
+
+    .preset-actions {
+      display: flex;
+      margin-top: .5em;
+
+      & > .spacer {
+        flex-grow: 99;
+      }
+    }
+  }
+}

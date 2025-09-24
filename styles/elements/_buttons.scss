@@ -1,0 +1,392 @@
+@use '../variables' as *;
+@use 'sass:math';
+
+@mixin buttonMixin($bmBackground,
+  $bmLine,
+  $bmShadow,
+  $bmText,
+  $bmHover,
+  $bmFocus,
+  $bmActive,
+  $bmTextDisabled,
+  $bmDisabled,
+  $bmRefresh,
+  $bmCheck) {
+  background-color: $bmBackground;
+  border: 1px solid $bmLine;
+  box-shadow: 0 (-$buttonShadowSize) 0 0 $bmShadow inset;
+  color: $bmText;
+
+  &.hover,
+  &:hover {
+    border-color: $bmLine;
+    background-color: $bmHover;
+    box-shadow: 0 (-$buttonShadowSize) 0 0 $bmShadow inset;
+  }
+
+  &.focus,
+  &:focus,
+  input[type="radio"]:focus+&,
+  input[type="checkbox"]:focus+&,
+  input[type="file"]:focus+&,
+  input[type="radio"]:focus+&:visited,
+  input[type="checkbox"]:focus+&:visited {
+    border-color: $bmLine;
+    background-color: $bmFocus;
+    box-shadow: 0 (-$buttonShadowSize) 0 0 $bmShadow inset,
+      0 0 0 3px rgba($bmFocus, 0.65);
+  }
+
+  &.active,
+  &:active,
+  input:checked+&,
+  input:checked:hover+&,
+  .dropdown>&:focus,
+  .dropdown:focus-within>&,
+  .dropdown.focus-within>& {
+    border-color: $bmLine;
+    background-color: $bmActive;
+    box-shadow: 0 0 0 0 $bmShadow inset, 0 0 0 0 rgba($bmActive, 0.65);
+  }
+
+  &:active:focus,
+  &.active:focus,
+  input:checked:focus+& {
+    background-color: $bmActive;
+    box-shadow: 0 0 0 0 $bmShadow inset, 0 0 0 2px $bmBackground;
+  }
+
+  &.disabled,
+  &:disabled,
+  &:disabled:hover,
+  input[type="file"]:disabled+&,
+  input[type="radio"]:disabled+&,
+  input[type="checkbox"]:disabled+& {
+    color: $bmTextDisabled;
+    border-color: $bmLine;
+    background-color: $bmDisabled;
+    box-shadow: 0 (-$buttonShadowSize) 0 0 $bmShadow inset;
+
+    .icon {
+      fill: $bmTextDisabled;
+    }
+  }
+
+  input[type="radio"]:checked:disabled+&,
+  input[type="checkbox"]:checked:disabled+& {
+    box-shadow: none;
+  }
+
+  &:before:active {
+    box-shadow: 0 (-$buttonShadowSize) 0 0 $bmShadow inset;
+  }
+
+  .icon {
+    fill: $bmText;
+  }
+
+  &.loading {
+    color: transparent;
+  }
+
+  &.loading:after {
+    background-image: $bmRefresh;
+  }
+
+  &.loading.success:after {
+    background-image: $bmCheck;
+  }
+}
+
+.button,
+.button:visited,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  animation: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $utilityText;
+  font-size: $buttonFontSize;
+  height: $buttonHeight;
+  line-height: math.div($buttonHeight, 1.3);
+  margin: 0 0.4rem 0.4rem 0;
+  overflow: hidden;
+  padding: $buttonPadding;
+  vertical-align: bottom;
+
+  @include buttonMixin($buttonBackground,
+    $buttonLine,
+    $buttonShadow,
+    $buttonText,
+    $buttonHover,
+    $buttonFocus,
+    $buttonActive,
+    $buttonTextDisabled,
+    $buttonDisabled,
+    $buttonRefresh,
+    $buttonCheck );
+
+  &.hover,
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.focus,
+  &:focus,
+  input[type="radio"]:focus+&,
+  input[type="checkbox"]:focus+&,
+  input[type="radio"]:focus+&:visited,
+  input[type="checkbox"]:focus+&:visited {
+    outline-width: 0;
+    text-decoration: none;
+    z-index: 888;
+  }
+
+  &.active,
+  &:active,
+  input:checked+&,
+  input:checked:hover+&,
+  .dropdown>&:focus,
+  .dropdown:focus-within>&,
+  .dropdown.focus-within>& {
+    padding: 0 1.2em 0;
+    margin-top: $buttonShadowSize !important;
+    height: calc(#{$buttonHeight} - #{$buttonShadowSize});
+    margin-top: $fontSize * 0.3;
+    outline-width: 0;
+    text-decoration: none;
+    z-index: 888;
+  }
+
+  &:active:focus,
+  &.active:focus,
+  input:checked:focus+& {
+    text-decoration: none;
+  }
+
+  &.disabled,
+  &:disabled,
+  &:disabled:hover,
+  input[type="radio"]:disabled+&,
+  input[type="checkbox"]:disabled+& {
+    height: $buttonHeight;
+    cursor: not-allowed;
+    margin-top: 0;
+
+    &:active {
+      margin-top: 0 !important;
+      padding: $buttonPadding;
+    }
+  }
+
+  input[type="radio"]:checked:disabled+&,
+  input[type="checkbox"]:checked:disabled+& {
+    height: calc(#{$buttonHeight} - #{$buttonShadowSize});
+  }
+
+  .icon {
+    width: 1.5em;
+    height: 1.5em;
+    position: relative;
+    top: 0.35em;
+  }
+
+  .label {
+    position: relative;
+    display: inline-block;
+    left: -0.75em;
+    padding: 0 0.75em 0 0.45em;
+    pointer-events: none;
+
+    &:before {
+      content: "";
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.15);
+      top: -2em;
+      left: -2em;
+      bottom: -2em;
+      right: 0;
+    }
+  }
+
+  &.loading {
+    color: transparent;
+    position: relative;
+
+    .label,
+    .icon {
+      opacity: 0;
+    }
+
+    &:after {
+      animation: loadingAnimation 1.5s infinite linear;
+      background-image: $buttonRefresh;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      content: "";
+      display: block;
+      overflow: visible;
+      width: 1.7em;
+      height: 1.7em;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      background-size: cover;
+      pointer-events: none;
+    }
+
+    &.success:after {
+      animation: none;
+      transform: translate(-50%, -50%);
+      width: 1.7em;
+      height: 1.7em;
+    }
+  }
+
+  &.primary {
+    @include buttonMixin(#2980d7,
+      #184d81,
+      #1c5997,
+      #fff,
+      #2473c2,
+      #2473c2,
+      #2066ac,
+      #93bfeb,
+      #2066ac,
+      url(../images/refresh-white.svg),
+      url(../images/check-white.svg));
+  }
+
+  &.secondary {
+    @include buttonMixin(#34495e,
+      #121a21,
+      #1b2631,
+      #fff,
+      #2d4052,
+      #2d4052,
+      #243342,
+      #5b80a4,
+      #243342,
+      url(../images/refresh-white.svg),
+      url(../images/check-white.svg));
+  }
+
+  &.positive {
+    @include buttonMixin(#28b463,
+      #176939,
+      #1c7d44,
+      #fff,
+      #25a75b,
+      #25a75b,
+      #209250,
+      #58da8e,
+      #209250,
+      url(../images/refresh-white.svg),
+      url(../images/check-white.svg));
+  }
+
+  &.negative {
+    @include buttonMixin(#cb4335,
+      #7a281f,
+      #8e2f25,
+      #fff,
+      #b63d2f,
+      #b63d2f,
+      #a2362a,
+      #da7c71,
+      #a2362a,
+      url(../images/refresh-white.svg),
+      url(../images/check-white.svg));
+  }
+
+  &.purple {
+    @include buttonMixin(#a300cc,
+      #6b00b3,
+      #7a0099,
+      #fff,
+      #b800e6,
+      #b800e6,
+      #7a0099,
+      #f0b3ff,
+      #7a0099,
+      url(../images/refresh-white.svg),
+      url(../images/check-white.svg));
+  }
+
+  &.radiant {
+    @include buttonMixin(#fbc531,
+      #a38020,
+      #bc9425,
+      #000,
+      #e2b12c,
+      #e2b12c,
+      #bc9425,
+      rgba(#000, 0.4),
+      #bc9425,
+      url(../images/refresh-black.svg),
+      url(../images/check-black.svg));
+  }
+
+  &.mini {
+    font-size: 0.65em;
+  }
+
+  &.small {
+    font-size: 0.75em;
+  }
+
+  &.medium {
+    font-size: 0.82em;
+  }
+
+  &.large {
+    font-size: 1.2em;
+  }
+
+  &.big {
+    font-size: 1.4em;
+  }
+
+  &.huge {
+    font-size: 1.7em;
+  }
+
+  &.massive {
+    font-size: 2em;
+  }
+}
+
+button.link,
+button.link:hover,
+button.link.hover,
+button.link:focus,
+button.link.focus,
+*:focus-within button.link,
+button.link.focus,
+button.link:active,
+button.link.active {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  margin-top: 0 !important;
+  background-color: transparent;
+  border-width: 0;
+  box-shadow: none;
+  height: inherit;
+  line-height: inherit;
+  border-radius: 0;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    transform: translate(-50%, -50%) scaleX(-1) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scaleX(-1) rotate(-359deg);
+  }
+}

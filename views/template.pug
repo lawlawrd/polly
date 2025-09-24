@@ -1,0 +1,84 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="utf-8") 
+		meta(name="viewport",content="width=device-width, initial-scale=1")
+
+		- const themeToggleTarget = theme === "dark" ? "light" : "dark";
+		- const redirectPath = typeof currentPath === "string" && currentPath.startsWith("/") ? currentPath : (activeNav && activeNav.path ? activeNav.path : "/");
+		- const themeToggleLabel = theme === "dark" ? "Light mode" : "Dark mode";
+		- const themeToggleIcon = theme === "dark" ? "☀️" : "🌙";
+		- const redirectParam = encodeURIComponent(redirectPath);
+		- const themeToggleUrl = "/theme-switch?theme=" + themeToggleTarget + "&redirect=" + redirectParam;
+
+		link(rel="icon", href="/images/face.svg", type="image/svg+xml")
+
+		block title
+			title= activeNav.label + " - Polly"
+		
+		block stylesheets
+			link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,300i,400,400i,700,700i|IBM+Plex+Sans:300,300i,400,400i,500,500i,700,700i|IBM+Plex+Serif:300,300i,400,400i,700,700i")
+			link(rel="stylesheet", href="/styles/polly-" + theme + ".min.css")
+		
+	block scripts
+		script(src="/scripts/" + activeNav.slug + ".js")
+
+	body(ontouchstart="")
+		header.navbar#top
+			a#brand(href="/",title="Back to frontpage", style="text-decoration: none; transform: scale(1.3);")
+				img(src="/images/face.svg")
+
+			input#navbar-toggler.navbar-toggle(type="checkbox")
+			label(for="navbar-toggler")
+				svg.icon.menu
+					use(xlink:href="/images/icons.svg#hamburger")
+				svg.icon.close
+					use(xlink:href="/images/icons.svg#clear")
+
+			nav.menu
+				ul.knobs
+					li.dropdown
+						a(tabindex="0",role="button",class="knob", style="cursor: pointer;") 
+							span= activeNav.label
+							svg.icon(style="margin-left: .4em; transform: scale(1.8) translateY(.12em); opacity: .7;")
+								use(xlink:href="/images/icons.svg#chevron-down")
+						nav.panel.arrow(style="z-index: 1234;")
+							if navigation && navigation.length > 0
+								ul
+									each nav in navigation
+										li(class=nav.slug == activeNav.slug ? "active" : "")
+											a(href=nav.path, title=nav.label)= nav.label
+										if nav.label && (nav.label == "Frontpage" || nav.label == "Invoices")
+											li.seperator
+
+			div.spacer
+
+			if currentUser
+				nav#user-nav
+					ul
+						li.dropdown
+							a(tabindex="1", class="user-greeting")
+								span.user-avatar(title=currentUser.firstName + " " + currentUser.lastName)
+									if currentUser.avatar
+										img(src="https://daisy.erasmusbooks.nl" + currentUser.avatar,title=currentUser.firstName + " " + currentUser.lastName)
+									else 
+										span.no-avatar= (currentUser.firstName && currentUser.firstName.length > 0 ? currentUser.firstName.charAt(0).toUpperCase() : "?") + (currentUser.lastName && currentUser.lastName.length > 0 && currentUser.lastName.split(" ").filter((namePart) => namePart.charAt(0) == namePart.charAt(0).toUpperCase()).length > 0 ? currentUser.lastName.split(" ").filter((namePart) => namePart.charAt(0) == namePart.charAt(0).toUpperCase())[0].charAt(0) : "?")
+							nav.panel.arrow.top.right
+								ul
+										li#theme-switch
+											a.theme-switch(href=themeToggleUrl)= themeToggleIcon + " " + themeToggleLabel
+										li
+											a.logout(href="/logout") 🚪 Logout
+
+		main(id=activeNav.slug || "frontpage")
+			block content
+
+		footer
+			a(href="#top") Back to top
+
+		
+		script.
+			const menuToggle = document.querySelector("nav.menu .dropdown > .knob");
+			if (menuToggle) menuToggle.addEventListener("click", () => menuToggle.focus());
+		script(src="/scripts/app.js")
+		script(src="/scripts/" + activeNav.slug + ".js")

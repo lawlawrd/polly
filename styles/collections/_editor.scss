@@ -1,0 +1,493 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+
+.editor-wrapper {
+  position: relative;
+  background-color: $inputBackground;
+  color: $inputText;
+  border: 1px solid $inputLine;
+  border-radius: 6px;
+  outline-width: 0;
+  box-shadow: 0 0 0 0 $inputLineHover inset;
+
+  &:focus,
+  &:focus-within {
+    border-color: $inputLineHover;
+    box-shadow: 0 0 0 2px $inputLineHover inset;
+    outline: 2px solid $inputLineActive;
+  }
+
+  &:active,
+  &.active {
+    border-color: $inputLineActive;
+    box-shadow: 0 0 0 2px $inputLineActive inset;
+    outline-width: 0;
+  }
+
+  &:disabled {
+    color: $inputVague;
+    background-color: $inputBackgroundDisabled;
+
+    &:hover {
+      cursor: not-allowed;
+      border-color: $inputVague;
+    }
+  }
+
+  &[readonly] {
+    color: $inputText;
+    background-color: $inputBackground;
+
+    &:hover {
+      cursor: not-allowed;
+      border-color: $inputVague;
+    }
+  }
+
+  &:invalid,
+  &.invalid {
+    border-color: $inputLineError;
+
+    &:focus {
+      border-color: $inputLineError;
+      box-shadow: 0 0 0 2px $inputLineError inset;
+      outline-width: 0;
+    }
+  }
+
+  &>.editor-toolbar {
+    font-family: $utilityText;
+    display: flex;
+    border-bottom: 1px solid $mainLine;
+    height: $inputHeight;
+    padding: 0 0.4em;
+
+    &>.dropdown>button {
+      height: calc($inputHeight - 1px);
+      white-space: nowrap;
+      overflow: hidden;
+
+      &>span {
+        margin: 0 0.3em 0 0.4em;
+      }
+    }
+
+    &>.editor-block-types>button {
+      display: flex;
+      padding-top: 0.3em;
+
+      &:hover,
+      &:active {
+        padding-top: 0.3em !important;
+      }
+
+      &>span {
+        display: inline-block;
+        max-width: 9ch;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &>.editor-block-types:focus-within>button {
+      padding-top: 0.3em !important;
+    }
+
+    &>.dropdown>.panel>ul>li>a {
+      padding-right: 2em;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: transparent;
+      color: $mainText;
+      border-width: 0;
+      padding: 0 0.4em;
+      margin: 0;
+      box-shadow: none;
+      border-radius: 0;
+      height: auto;
+
+      &>.icon {
+        fill: rgba($mainVague, 0.8);
+      }
+
+      &:disabled,
+      &:hover:disabled,
+      &:active:disabled {
+        color: $mainLine;
+
+        &>.icon {
+          fill: $mainLine;
+        }
+      }
+
+      &:hover,
+      &.hover,
+      &:focus,
+      &.focus,
+      &:active,
+      &.active {
+        padding: 0 0.4em !important;
+        margin: 0 !important;
+        border-width: 0;
+        box-shadow: none;
+      }
+
+      &:hover,
+      &:focus {
+        background: rgba($mainBackgroundLite, 0.8);
+
+        &>.icon {
+          fill: $mainText;
+        }
+      }
+
+      &.active>.icon {
+        fill: $mainText;
+      }
+
+      .current-color {
+        width: 2.3em;
+        height: 2.3em;
+        transform: translate(0.3em, 0.5em);
+        border-radius: 50%;
+
+        &.nothing {
+          background-color: $mainBackgroundLite;
+          background-image: repeating-linear-gradient(-45deg,
+              $mainBackgroundLite,
+              $mainBackgroundLite 0.3rem,
+              color.adjust($mainBackgroundLite, $lightness: 5%) 0.3rem,
+              color.adjust($mainBackgroundLite, $lightness: 5%) 0.6rem);
+        }
+      }
+    }
+
+    &>.divider {
+      margin: 0 0.3em;
+      border-left: 1px solid $mainLine;
+      height: $inputHeight;
+    }
+
+    .toolbar-colors {
+      &>a {
+        display: flex;
+        padding-right: 0 !important;
+        cursor: pointer;
+
+        .spacer {
+          flex-grow: 99;
+        }
+
+        .current-color {
+          margin-left: 2em;
+          font-size: 1em;
+          width: 3em;
+          height: 1.8em;
+
+          &.nothing {
+            background-color: $mainBackgroundLite;
+            background-image: repeating-linear-gradient(-45deg,
+                $mainBackgroundLite,
+                $mainBackgroundLite 0.3rem,
+                color.adjust($mainBackgroundLite, $lightness: 3%) 0.3rem,
+                color.adjust($mainBackgroundLite, $lightness: 3%) 0.6rem);
+          }
+        }
+      }
+    }
+  }
+
+  .resize-cursor td,
+  .resize-cursor th {
+    cursor: col-resize;
+  }
+
+  &>.editor-content>[contenteditable] {
+    position: relative;
+    padding: $inputPadding;
+    min-height: 15rem;
+    resize: vertical;
+    overflow: auto;
+    // height: 40em;
+
+    p.is-editor-empty:before {
+      color: $mainLine;
+      font-family: $utilityText;
+      content: attr(data-placeholder);
+      float: left;
+      height: 0;
+      pointer-events: none;
+    }
+
+    div.ProseMirror-selectednode,
+    img.ProseMirror-selectednode {
+      box-shadow: 0 0 0 4px $blue !important;
+    }
+
+    .task-list {
+      list-style-type: none;
+
+      &>.task-item {
+        position: relative;
+
+        &>label {
+          position: absolute;
+          top: 0;
+          left: -1.5em;
+        }
+
+        &>div {
+          &>p:first-child {
+            margin-top: 0;
+          }
+
+          &>p:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    table {
+
+      td,
+      th {
+        border: 1px solid $mainLine;
+        padding: 0.35em 0.5em;
+
+        &.selectedCell {
+          background-color: $yellowBackground;
+        }
+
+        &>p {
+          margin: 0 !important;
+        }
+      }
+
+      thead th {
+        border-bottom: 2px solid $mainLine;
+      }
+
+      tfoot th {
+        border-top: 2px solid $mainLine;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .editor-tooltip {
+    transform: translateY(1em);
+    display: flex;
+    height: $inputHeight;
+    padding: 0 0.4em;
+
+    // &.link-active {
+    //   transform: translate(-6ch, 1em);
+    // }
+
+    &>.divider {
+      margin: 0 0.3em -1px;
+      border-left: 1px solid $mainLine;
+      height: $inputHeight;
+    }
+
+    button {
+      background-color: transparent;
+      color: $mainText;
+      border-width: 0;
+      padding: 0 0.4em;
+      margin: 0;
+      box-shadow: none;
+      border-radius: 0;
+      height: auto;
+      white-space: nowrap;
+
+      &>.icon {
+        fill: rgba($mainVague, 0.8);
+      }
+
+      &:disabled,
+      &:hover:disabled,
+      &:active:disabled {
+        color: $mainLine;
+
+        &>.icon {
+          fill: $mainLine;
+        }
+      }
+
+      &:hover,
+      &.hover,
+      &:focus,
+      &.focus,
+      &:active,
+      &.active {
+        padding: 0 0.4em !important;
+        margin: 0 !important;
+        border-width: 0;
+        box-shadow: none;
+      }
+
+      &:hover,
+      &:focus {
+        background: rgba($mainBackgroundLite, 0.8);
+
+        &>.icon {
+          fill: $mainText;
+        }
+      }
+
+      &.active>.icon {
+        fill: $mainText;
+      }
+
+      &.color-picker {
+        white-space: nowrap;
+        padding-right: 1.3em;
+
+        &:hover,
+        &:focus {
+          padding-right: 1.3em !important;
+        }
+      }
+
+      .current-color {
+        width: 2.3em;
+        height: 2.3em;
+        transform: translate(0.3em, 0.5em);
+        border-radius: 50%;
+
+        &.nothing {
+          background-color: $mainBackgroundLite;
+          background-image: repeating-linear-gradient(-45deg,
+              $mainBackgroundLite,
+              $mainBackgroundLite 0.3rem,
+              color.adjust($mainBackgroundLite, $lightness: 5%) 0.3rem,
+              color.adjust($mainBackgroundLite, $lightness: 5%) 0.6rem);
+        }
+      }
+    }
+
+    .editor-tooltip-input-link {
+      font-size: 0.8em;
+      margin-top: 0.3em;
+      width: 37ch;
+      z-index: 99999;
+    }
+  }
+
+  .editor-color-picker {
+    padding: 1em;
+    z-index: 100149;
+    max-width: 60vw;
+    min-width: 30em;
+    overflow: auto;
+
+    header {
+      margin: 0 0 0.7em;
+      font-family: $utilityText;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 0.6em;
+
+      .tag {
+        font-size: 0.9em;
+        height: 5em;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 5em;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          box-shadow: 0 0 0 2px $blue;
+        }
+
+        &.active {
+          box-shadow: 0 0 0 4px rgba($blue, 0.65);
+          font-weight: bold;
+        }
+
+        &.nothing {
+          background-color: $mainBackgroundLite;
+          background-image: repeating-linear-gradient(-45deg,
+              $mainBackgroundLite,
+              $mainBackgroundLite 0.3rem,
+              color.adjust($mainBackgroundLite, $lightness: 3%) 0.3rem,
+              color.adjust($mainBackgroundLite, $lightness: 3%) 0.6rem);
+        }
+      }
+    }
+  }
+
+  .image-dialog,
+  .youtube-dialog {
+    padding: 1em;
+    z-index: 100149;
+    min-width: 36em;
+
+    .close {
+      cursor: pointer;
+    }
+
+    header {
+      margin: 0 0 0.7em;
+      font-family: $utilityText;
+    }
+
+    .basic-form>*:not(label) {
+      grid-column-end: -1;
+    }
+
+    .image-preview {
+      margin-top: 1em;
+      padding-top: 1em;
+      border-top: 1px solid $mainLine;
+      display: grid;
+      grid-template-columns: 35% 65%;
+      grid-gap: 1em;
+
+      .no-images {
+        width: 100%;
+        padding: 60% 2em;
+        background-color: $mainBackgroundLite;
+        background-image: repeating-linear-gradient(-45deg,
+            $mainBackgroundLite,
+            $mainBackgroundLite 0.4rem,
+            color.adjust($mainBackgroundLite, $lightness: 4%) 0.4rem,
+            color.adjust($mainBackgroundLite, $lightness: 4%) 0.8rem);
+        text-align: center;
+        font-weight: bold;
+        color: rgba($mainText, 0.5);
+        font-family: $utilityText;
+      }
+
+      label {
+        display: block;
+      }
+
+      input[type="text"] {
+        width: calc(100% - 1em);
+        margin-bottom: 0.8em;
+      }
+    }
+
+    footer {
+      margin: 1em -1em -1em -1em;
+    }
+  }
+}

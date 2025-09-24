@@ -1,0 +1,59 @@
+@use '../variables' as *;
+
+article,
+.article {
+  &>header {
+    padding-bottom: 0.5em;
+    border-bottom: 1px dotted $mainLine;
+
+    &>h1,
+    &>h2,
+    &>h3,
+    &>h4,
+    &>h5,
+    &>h6 {
+      margin-bottom: 0;
+    }
+
+    .meta {
+      font-family: $utilityText;
+      color: $mainVague;
+
+      a {
+        color: $mainVague;
+        text-decoration: underline solid $mainVague;
+      }
+
+      time {
+        text-decoration-color: $mainVague;
+      }
+    }
+  }
+
+  &>footer {
+    font-family: $utilityText;
+    color: $mainLine;
+    border-top: 1px dotted $mainLine;
+    padding-top: 0.5em;
+
+    a {
+      color: $mainLine;
+      text-decoration: underline solid $mainLine;
+    }
+
+    time {
+      text-decoration-color: $mainLine;
+    }
+  }
+
+  &>section,
+  &>.section {
+    padding-bottom: 1em;
+    border-bottom: 1px solid $mainLine;
+
+    &:last-child {
+      padding-bottom: 1em;
+      border-bottom-width: 0;
+    }
+  }
+}

@@ -1,0 +1,274 @@
+@use '../variables' as *;
+@use 'sass:math';
+
+.basic-form {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-row-gap: 5px;
+  margin: $paragraphSpacer 0;
+
+  legend {
+    grid-column: 1/17 !important;
+    line-height: 1.3em;
+    margin: $paragraphSpacer 0;
+    display: block;
+    font-family: $utilityText;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-bottom: 1px dotted $mainLine;
+  }
+
+  &>label {
+    grid-column: 1/4;
+    line-height: $inputHeight;
+    padding-right: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &>small {
+      color: $mainVague;
+    }
+  }
+
+  &> :not(label) {
+    grid-column: 4/15;
+    width: auto;
+  }
+
+  &>input+.help,
+  &>textarea+.help,
+  &>select+.help,
+  &>.checkboxes.buttons+.help,
+  &>.radios.buttons+.help {
+    margin-top: -0.6em;
+  }
+
+  &>.checkboxes,
+  &>.radios {
+    margin-top: math.div($inputHeight, 5);
+  }
+
+  &>.checkboxes.buttons,
+  &>.radios.buttons {
+    margin-top: 0;
+  }
+
+  &>.controls {
+    min-height: $buttonHeight;
+    margin-top: 0.4rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    &>* {
+      margin-right: 0;
+      margin-left: 0.4rem;
+
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+
+    &>.spacer {
+      flex: 100 0 auto;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 666px) {
+    &>label {
+      grid-column: 1/17;
+      line-height: 1em;
+      padding-top: 0.3em;
+      color: $mainVague;
+      overflow: visible;
+      white-space: normal;
+      text-overflow: clip;
+    }
+
+    &> :not(label) {
+      grid-column: 1/17;
+    }
+  }
+
+  @media (min-width: 667px) and (max-width: 1023px) {
+    &>label {
+      grid-column: 1/4;
+    }
+
+    &> :not(label) {
+      grid-column: 4/17;
+    }
+  }
+}
+
+.login-form {
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  &>legend {
+    line-height: 1.3em;
+    margin: 0 0 $paragraphSpacer 0;
+    display: block;
+    font-family: $utilityText;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-bottom: 1px dotted $mainLine;
+  }
+
+  &>label,
+  &>input[type="text"],
+  &>input[type="password"] {
+    display: block;
+    width: 100%;
+  }
+
+  .group {
+    display: flex;
+  }
+
+  &>input[type="text"],
+  &>input[type="password"],
+  &>.group {
+    margin-bottom: math.div($paragraphSpacer, 2);
+  }
+
+  &>.controls {
+    min-height: $buttonHeight;
+    display: flex;
+    align-items: center;
+  }
+
+  &>label,
+  &>input[type="text"],
+  &>input[type="password"] {
+    display: block;
+    width: 100%;
+  }
+
+  .group {
+    display: flex;
+  }
+
+  &>input[type="text"],
+  &>input[type="password"],
+  &>.group {
+    margin-bottom: math.div($paragraphSpacer, 2);
+  }
+
+  &>.controls {
+    display: flex;
+    align-items: baseline;
+
+    &>label[for="remember"] {
+      order: 1;
+      cursor: pointer;
+
+      &:hover,
+      &:focus-within {
+        border-bottom: 1px dotted $mainVague;
+      }
+    }
+
+    &>button,
+    &>.button {
+      order: 4;
+      margin: 0 0 0 0.4rem;
+    }
+
+    &>.forgot-password {
+      order: 3;
+    }
+
+    &>.spacer {
+      flex: 100 0 auto;
+      order: 2;
+    }
+  }
+}
+
+$inputHeightIG: $inputHeight * 1.15;
+
+.integrated-label {
+  position: relative;
+  margin: 0 0 0.4rem;
+
+  &>input,
+  &>textarea,
+  &>.suggestions {
+    width: 100%;
+    height: $inputHeightIG;
+    padding-top: 0.9em;
+    padding-bottom: 0.1em;
+    transition: 0.3s padding-top, 0.3s padding-bottom;
+
+    &+label {
+      position: absolute;
+      font-size: 0.75em;
+      left: 0.6rem;
+      top: 0.1rem;
+      pointer-events: none;
+      color: rgba($mainText, 0.5);
+      opacity: 1;
+      transition: 0.3s opacity, 0.3s top;
+    }
+
+    &:placeholder-shown {
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+
+      &+label {
+        top: 0.4em;
+        opacity: 0;
+      }
+    }
+  }
+
+  &>textarea {
+    padding-top: 1.2em;
+  }
+}
+
+.integrated-labels {
+
+  &.group>.integrated-label,
+  .group>.integrated-label {
+    input {
+      border-radius: 0;
+      border-right-width: 0;
+    }
+
+    &:first-child input {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+
+    &:last-child input {
+      border-right-width: 1px;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+  }
+
+  button,
+  .button {
+    height: $inputHeightIG;
+    line-height: $inputHeightIG * 0.9;
+
+    &:active,
+    &.active {
+      height: calc(#{$inputHeightIG} - #{$buttonShadowSize});
+    }
+  }
+
+  input:checked+button,
+  input:checked+.button {
+    height: calc(#{$inputHeightIG} - #{$buttonShadowSize});
+  }
+
+  select {
+    height: $inputHeightIG;
+    line-height: $inputHeightIG * 0.9;
+    width: 100%;
+  }
+}

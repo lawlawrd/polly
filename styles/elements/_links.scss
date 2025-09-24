@@ -1,0 +1,246 @@
+@use '../variables' as *;
+
+a,
+.link {
+  color: $linkColor;
+  text-decoration: underline solid $linkLine;
+  -webkit-text-decoration: underline solid $linkLine;
+  // cursor: pointer;
+
+  &.hover,
+  &:hover {
+    color: $linkHover;
+    text-decoration: underline solid $linkLine;
+    -webkit-text-decoration: underline solid $linkLine;
+  }
+
+  &.focus,
+  &:focus {
+    outline-width: 0;
+    color: $linkActive;
+    text-decoration: underline solid $linkLine;
+    -webkit-text-decoration: underline solid $linkLine;
+    outline: 1px dotted $mainVague;
+  }
+
+  &.active,
+  &:active {
+    color: $linkActive;
+    text-decoration: underline solid $mainText;
+    -webkit-text-decoration: underline solid $mainText;
+  }
+
+  &.visited,
+  &:visited {
+    color: $linkVisited;
+    text-decoration: underline solid $linkVisited;
+    -webkit-text-decoration: underline solid $linkVisited;
+
+    &.hover,
+    &:hover {
+      color: $linkHover;
+      text-decoration: underline solid $linkVisited;
+      -webkit-text-decoration: underline solid $linkVisited;
+    }
+
+    &.focus,
+    &:focus {
+      outline-width: 0;
+      color: $linkActive;
+      text-decoration: underline solid $linkVisited;
+      -webkit-text-decoration: underline solid $linkVisited;
+      outline: 1px dotted $mainVague;
+    }
+
+    &.active,
+    &:active {
+      color: $linkActive;
+      text-decoration: underline solid $mainText;
+      -webkit-text-decoration: underline solid $mainText;
+    }
+  }
+
+  &.button {
+    text-decoration: none;
+    -webkit-text-decoration: none;
+  }
+}
+
+@mixin knobMixin($knobBackground,
+  $knobHeader,
+  $knobText,
+  $knobHover,
+  $knobActive,
+  $knobActiveText,
+  $knobBorder) {
+  background-color: $knobBackground;
+  color: $knobText;
+  border: 1px solid $knobBorder;
+
+  &:hover,
+  &.hover {
+    background-color: $knobHover;
+    color: $knobText;
+  }
+
+  &:focus,
+  &.focus {
+    background-color: $knobHover;
+    color: $knobText;
+    border-color: $knobBorder;
+    box-shadow: 0 0 0 2px $knobBorder;
+  }
+
+  &:active,
+  &.active {
+    background-color: $knobActive;
+    border-color: $knobActive;
+    color: $knobActiveText;
+
+    &>.icon {
+      fill: $knobActiveText;
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    color: rgba($knobText, 0.5);
+  }
+
+  &>.icon {
+    fill: $knobActive;
+  }
+}
+
+.knobs>li>a,
+.knob {
+  @include knobMixin($mainBackgroundLite,
+    $mainVague,
+    $mainText,
+    $mainBackgroundLiteHover,
+    $mainVague,
+    $white,
+    $mainLine );
+
+  display: inline-block;
+  font-family: $utilityText;
+  height: $inputHeight;
+  line-height: $inputHeight;
+  padding: 0 1em;
+  margin: 0 0.4rem 0.4rem 0;
+  text-decoration: none;
+  -webkit-text-decoration: none;
+  border-radius: 6px;
+
+  &:hover,
+  &.hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active {
+    text-decoration: none;
+    -webkit-text-decoration: none;
+    outline-width: 0;
+  }
+
+  &.disabled,
+  &:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+
+    &>.icon,
+    &>svg {
+      opacity: 0.5;
+    }
+  }
+
+  &>.icon {
+    transform-origin: center center;
+    transform: scale(1.6, 1.6) translateY(0.1em);
+    margin-right: 0.5em;
+
+    &.last {
+      margin-right: 0;
+    }
+  }
+}
+
+.knob.yellow {
+  @include knobMixin($yellowBackground,
+    $yellowHeader,
+    $yellowText,
+    $yellowHover,
+    $yellowActive,
+    $yellowActiveText,
+    $yellowBorder );
+}
+
+.knob.red {
+  @include knobMixin($redBackground,
+    $redHeader,
+    $redText,
+    $redHover,
+    $redActive,
+    $redActiveText,
+    $redBorder );
+}
+
+.knob.blue {
+  @include knobMixin($blueBackground,
+    $blueHeader,
+    $blueText,
+    $blueHover,
+    $blueActive,
+    $blueActiveText,
+    $blueBorder );
+}
+
+.knob.green {
+  @include knobMixin($greenBackground,
+    $greenHeader,
+    $greenText,
+    $greenHover,
+    $greenActive,
+    $greenActiveText,
+    $greenBorder );
+}
+
+.knob.purple {
+  @include knobMixin($purpleBackground,
+    $purpleHeader,
+    $purpleText,
+    $purpleHover,
+    $purpleActive,
+    $purpleActiveText,
+    $purpleBorder );
+}
+
+.knob.orange {
+  @include knobMixin($orangeBackground,
+    $orangeHeader,
+    $orangeText,
+    $orangeHover,
+    $orangeActive,
+    $orangeActiveText,
+    $orangeBorder );
+}
+
+.knob.gray {
+  @include knobMixin($grayBackground,
+    $grayHeader,
+    $grayText,
+    $grayHover,
+    $grayActive,
+    $grayActiveText,
+    $grayBorder );
+}
+
+.knob.transparent {
+  @include knobMixin(transparent,
+    $grayHeader,
+    $grayText,
+    $grayHover,
+    $mainVague,
+    $grayActiveText,
+    $grayBorder );
+}

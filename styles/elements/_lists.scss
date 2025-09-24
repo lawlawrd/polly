@@ -1,0 +1,78 @@
+@use '../variables' as *;
+@use 'sass:math';
+
+ol,
+ul {
+  margin: $paragraphSpacer 2em;
+
+  &>ol,
+  &>ul,
+  li>ol,
+  li>ul {
+    margin: 0 2em;
+  }
+
+  &>li>p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+dl {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: $paragraphSpacer 0;
+
+  dt {
+    flex: 0 0 25%;
+    padding-right: 1em;
+    font-family: $utilityText;
+    color: $mainVague;
+    word-spacing: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  dd {
+    flex: 0 0 75%;
+  }
+
+  hr {
+    flex: 0 0 100%;
+    border-width: 0;
+    margin: 0 0 math.div($lineHeight, 2);
+  }
+
+  &.inverse {
+    dt {
+      flex: 0 0 75%;
+    }
+
+    dd {
+      flex: 0 0 25%;
+      text-align: right;
+    }
+  }
+
+  &.equal {
+    dt {
+      flex: 0 0 50%;
+    }
+
+    dd {
+      flex: 0 0 50%;
+      text-align: right;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 666px) {
+  dl dt {
+    flex: 0 0 25%;
+  }
+
+  dl dd {
+    flex: 0 0 75%;
+  }
+}

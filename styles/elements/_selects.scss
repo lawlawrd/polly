@@ -1,0 +1,41 @@
+@use '../variables' as *;
+
+select {
+  font-family: $utilityText;
+  appearance: none;
+  background-color: $inputBackground;
+  background-image: url(/images/chevron-down.svg);
+  background-repeat: no-repeat;
+  background-size: 2em 2em;
+  background-position: calc(100% - 0.4em) center;
+  cursor: pointer;
+  padding-right: 2.5em;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-image: $chevronHover;
+
+    &[disabled] {
+      background-image: url(/images/chevron-down.svg);
+    }
+  }
+
+  &[multiple] {
+    min-height: $inputHeight * 2;
+    background-image: none;
+    padding: 0.5em 0 0;
+
+    &[disabled],
+    &[disabled]:active,
+    &[disabled]:focus,
+    &[disabled]:hover {
+      background-image: none;
+      background-color: $inputBackgroundDisabled;
+    }
+  }
+
+  option {
+    padding: 0.4em 1em;
+  }
+}

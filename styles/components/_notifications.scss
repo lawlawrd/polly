@@ -1,0 +1,121 @@
+@use '../variables' as *;
+
+@mixin notificationMixin($notificationBackground,
+  $notificationBorder,
+  $notificationText,
+  $notificationHeader) {
+  background-color: $notificationBackground;
+  color: $notificationText;
+  border: 1px solid $notificationBorder;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $notificationHeader;
+  }
+
+  &>svg.icon {
+    fill: $notificationHeader;
+  }
+
+  .control.close {
+    svg {
+      fill: $notificationHeader;
+    }
+
+    &:hover svg,
+    &:focus svg {
+      fill: $notificationHeader;
+    }
+  }
+}
+
+.notification {
+  @include notificationMixin($mainBackgroundLite,
+    $mainLine,
+    $mainText,
+    $mainVague );
+
+  margin: $paragraphSpacer 0;
+  padding: 0 4rem 0 2rem;
+  border-radius: 6px;
+  position: relative;
+  overflow: auto;
+
+  &>svg.icon {
+    width: 4em;
+    height: 4em;
+    float: left;
+    margin: 1em 1em 1em 0;
+  }
+
+  .control.close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+
+    svg {
+      width: 1.7rem;
+      height: 1.7rem;
+    }
+  }
+
+  &.sticky {
+    position: relative;
+    border-width: 0 0 1px 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  &.yellow {
+    @include notificationMixin($yellowActive,
+      $yellowBorder,
+      $yellowActiveText,
+      $yellowActiveText );
+  }
+
+  &.blue {
+    @include notificationMixin($blueActive,
+      $blueBorder,
+      $blueActiveText,
+      $blueActiveText );
+  }
+
+  &.red {
+    @include notificationMixin($redActive,
+      $redBorder,
+      $redActiveText,
+      $redActiveText );
+  }
+
+  &.green {
+    @include notificationMixin($greenActive,
+      $greenBorder,
+      $greenActiveText,
+      $greenActiveText );
+  }
+
+  &.purple {
+    @include notificationMixin($purpleActive,
+      $purpleBorder,
+      $purpleActiveText,
+      $purpleActiveText );
+  }
+
+  &.orange {
+    @include notificationMixin($orangeActive,
+      $orangeBorder,
+      $orangeActiveText,
+      $orangeActiveText );
+  }
+
+  &.gray {
+    @include notificationMixin($grayBackground,
+      $grayBorder,
+      $grayText,
+      $grayActive );
+  }
+}

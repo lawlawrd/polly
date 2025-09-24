@@ -1,0 +1,162 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+@mixin tagMixin($tagText, $tagBackground, $tagHover, $tagIcon) {
+  color: $tagText;
+  background-color: $tagBackground;
+
+  &>.icon {
+    fill: $tagIcon;
+  }
+
+  &:hover,
+  &.hover {
+    color: $tagText;
+    background-color: $tagHover;
+
+    &>.icon {
+      fill: $tagText;
+    }
+  }
+}
+
+.tag {
+  @include tagMixin($mainText, $grayHover, $grayHover, $mainVague);
+
+  font-family: $utilityText;
+  font-weight: 200;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0em 0.4em;
+  font-size: 0.7em;
+  line-height: 1.7em;
+  position: relative;
+  top: -0.1em;
+  text-decoration: none;
+
+  &.badge {
+    min-width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    text-align: center;
+    border-radius: 0.9em 0.9em;
+    padding: 0 0.3em;
+  }
+
+  &>.icon {
+    width: 1.3em;
+    height: 1.3em;
+    transform: translateY(0.25em);
+  }
+
+  &:hover,
+  &.hover,
+  &:active,
+  &:visited,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &.alt {
+    @include tagMixin($mainText,
+      color.adjust($grayHover, $lightness: -10%),
+      color.adjust($grayHover, $lightness: -12%),
+      $mainVague );
+  }
+
+  &.red {
+    @include tagMixin(#fff, #cb4335, #d05649, #f5d9d6);
+  }
+
+  &.blue {
+    @include tagMixin(#fff, #2980d7, #3d8cdb, #e6f2ff);
+  }
+
+  &.yellow {
+    @include tagMixin(#000, #f1c40f, #f2ca26, #fdf9e7);
+  }
+
+  &.green {
+    @include tagMixin(#000, #28b463, #29bc67, #d5f6e3);
+  }
+
+  &.orange {
+    @include tagMixin(#fff, #d35400, #e65c00, #ffa366);
+  }
+
+  &.purple {
+    @include tagMixin(#fff, #9933ff, #a64dff, #e6ccff);
+  }
+
+  &.pink {
+    @include tagMixin(#000, #ffc0cb, #ffcdd5, #ffecef);
+  }
+
+  &.teal {
+    @include tagMixin($white, #008080, #00b3b3, #d9ecec);
+  }
+
+  &.navy {
+    @include tagMixin($white, #000080, #262693, #b2b2d9);
+  }
+
+  &.olive {
+    @include tagMixin($white, #808000, #999933, #d9d9b2);
+  }
+
+  &.salmon {
+    @include tagMixin($white, #fa8072, #fb998e, #fed9d5);
+  }
+
+  &.magenta {
+    @include tagMixin($white, #ff00ff, #ff59ff, #ffccff);
+  }
+
+  &.cyan {
+    @include tagMixin($black, #00ffff, #b2ffff, #00d9d9);
+  }
+
+  &.lightgray {
+    @include tagMixin($black, #ccc, #aaa, #999);
+  }
+
+  &.chocolate {
+    @include tagMixin($white, #663300, #262626, #eee);
+  }
+
+  &.black {
+    @include tagMixin($white, $black, #262626, #eee);
+  }
+
+  &.erasmus {
+    @include tagMixin(#fff, #006b57, #005746, rgba(255, 255, 255, 0.5));
+  }
+
+  &.paris {
+    @include tagMixin(#fff, #005c90, #005746, rgba(255, 255, 255, 0.5));
+  }
+}
+
+h2 .tag {
+  font-size: 1.25rem;
+  border-radius: 6px;
+}
+
+h3 .tag {
+  font-size: 1.25rem;
+  border-radius: 5px;
+}
+
+h4 .tag {
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+h5 .tag {
+  font-size: 0.7rem;
+}
+
+h6 .tag {
+  font-size: 0.7rem;
+  line-height: 1.7em;
+}

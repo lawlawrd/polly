@@ -1,0 +1,307 @@
+@use "../variables" as *;
+
+aside.sidebar {
+  background-color: $asideBackground;
+  color: $asideText;
+  border-right: 1px solid $asideLine;
+
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  input:not([type]),
+  textarea,
+  select,
+  .input-container {
+    background-color: $asideInputBackground;
+    color: $asideInputText;
+    border: 1px solid $asideInputLine;
+    box-shadow: 0 0 0 0 $asideInputLineHover inset;
+
+    &:hover {
+      border-color: $asideInputLineHover;
+    }
+
+    &:focus {
+      border-color: $asideInputLineHover;
+      box-shadow: 0 0 0 2px $asideInputLineHover inset;
+    }
+
+    &:active,
+    &.active {
+      border-color: $asideInputLineActive;
+      box-shadow: 0 0 0 2px $asideInputLineActive inset;
+    }
+
+    &:disabled {
+      color: $asideInputVague;
+      background-color: $asideInputBackgroundDisabled;
+
+      &:hover {
+        border-color: $asideInputVague;
+      }
+    }
+
+    &[readonly] {
+      color: $asideInputText;
+      background-color: $asideInputBackground;
+
+      &:hover {
+        border-color: $asideInputVague;
+      }
+    }
+
+    &:invalid,
+    &.invalid {
+      border-color: $asideInputLineError;
+
+      &:focus {
+        border-color: $asideInputLineError;
+        box-shadow: 0 0 0 2px $asideInputLineError inset;
+      }
+    }
+
+    &.invalid {
+      border-color: $asideInputLineError !important;
+      box-shadow: 0 0 0 2px $asideInputLineError inset !important;
+    }
+
+    &[required] {
+      border-color: $asideInputLine;
+
+      &:hover {
+        border-color: $asideInputLineHover;
+
+        &:invalid,
+        &.invalid {
+          border-color: $asideInputLineError;
+
+          &:empty {
+            border-color: $asideInputLineHover;
+          }
+        }
+      }
+
+      &:focus {
+        border-color: $asideInputLineFocus;
+        box-shadow: 0 0 0 2px $asideInputLineFocus inset;
+
+        &:invalid,
+        &.invalid {
+          border-color: $asideInputLineError;
+          box-shadow: 0 0 0 2px $asideInputLineError inset;
+
+          &:empty {
+            border-color: $asideInputLineFocus;
+            box-shadow: 0 0 0 2px $asideInputLineFocus inset;
+          }
+        }
+      }
+
+      &:active {
+        border-color: $asideInputLineActive;
+        box-shadow: 0 0 0 2px $asideInputLineActive inset;
+
+        &:invalid,
+        &.invalid {
+          border-color: $asideInputLineError;
+          box-shadow: 0 0 0 2px $asideInputLineError inset;
+
+          &:empty {
+            border-color: $asideInputLineActive;
+            box-shadow: 0 0 0 2px $asideInputLineActive inset;
+          }
+        }
+      }
+    }
+  }
+
+  & > .sidebar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    border-bottom: 1px solid $asideLine;
+  }
+
+  &.expandable {
+    & > .sidebar-group {
+      & > input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+
+        &:checked + label + .sidebar-group-content {
+          height: auto;
+          margin-bottom: .5rem;
+        }
+
+        &:checked + label > .icon {
+          transform: rotate(0deg) translateY(0.4em);
+        }
+
+        &:checked + label {
+          opacity: 1;
+        }
+      }
+
+      & > label {
+        padding-left: 0;
+        opacity: .5;
+
+        & > .icon {
+          fill: $asideText;
+          width: 1.6em;
+          height: 1.6em;
+          transform: rotate(-180deg) translateY(-0.4em);
+          transition: 0.2s transform;
+          opacity: 0.8;
+          margin-top: 0.4em;
+        }
+
+        & > strong {
+          margin-left: 0.2em;
+        }
+      }
+
+      .sidebar-group-content {
+        height: 0;
+        overflow: hidden;
+        transition: 0.2s height;
+
+        & > * {
+          width: 100%;
+        }
+
+        .checkboxes, .radios {
+          li {
+            display: flex;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            min-width: 0;
+            max-width: 100%;
+
+            & > input {
+              flex-grow: 1;
+            }
+            & > label {
+              flex-grow: 99;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+main {
+  position: relative;
+
+  & > input#sidebar-toggle {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+
+    & + label {
+      display: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    & > input#sidebar-toggle + label {
+      position: fixed;
+      top: 80vh;
+      right: 0;
+      display: block;
+      background-color: $mainBackgroundLite;
+      width: $headerHeight * 0.8;
+      height: $headerHeight * 0.8;
+      text-decoration: none;
+      border-radius: 6px 0 0 6px;
+      border-width: 1px 0 1px 1px;
+      border-style: solid;
+      border-color: $mainLine;
+      padding: 0;
+      margin: 0;
+      transition: 0.2s right;
+      box-shadow: -2px 2px 2px rgba($mainText, 0.3);
+
+      &:hover,
+      &:focus {
+        background-color: $mainBackground;
+      }
+
+      & .icon {
+        fill: $mainText;
+        width: 50%;
+        height: 50%;
+        margin: 25%;
+
+        &.close {
+          display: none;
+        }
+      }
+    }
+
+    & > input#sidebar-toggle + label + aside {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      overflow: hidden;
+      max-width: 100vw;
+      min-height: 100%;
+      padding: 0;
+      transform: translateX(100%);
+      transition: 0.2s transform;
+      background-color: $mainBackground;
+      border-left: 1px solid $mainLine;
+    }
+
+    & > input#sidebar-toggle:checked {
+      & + label {
+        right: calc(24em - 1px);
+        z-index: 999;
+        background-color: $mainBackground;
+
+        & > .icon {
+          &.menu {
+            display: none;
+          }
+
+          &.close {
+            display: block;
+          }
+        }
+
+        & + aside {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 24em;
+          max-width: 100vw;
+          z-index: 998;
+          padding: 0.5rem;
+          box-shadow: 0 3px 5px rgba($mainText, 0.3);
+          transform: translateX(0);
+
+          & > .panel {
+            position: sticky;
+            bottom: 300px;
+          }
+        }
+      }
+    }
+  }
+}

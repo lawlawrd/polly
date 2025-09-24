@@ -1,0 +1,31 @@
+extends ./layout.pug
+
+block title
+  title Register | Polly
+
+block content
+  form.container.yellow.register-form(method="post", action="/register")
+    p Register a new account:
+    div.integrated-label
+      - const emailValue = form && form.email ? form.email : ""
+      input#email(type="email", name="email", placeholder="Email", required, autocomplete="email", value=emailValue)
+      label(for="email") Email
+    div.integrated-label
+      - const firstNameValue = form && form.firstName ? form.firstName : ""
+      input#firstName(type="text", name="firstName", placeholder="First name", required, autocomplete="given-name", value=firstNameValue)
+      label(for="firstName") First name
+    div.integrated-label
+      - const lastNameValue = form && form.lastName ? form.lastName : ""
+      input#lastName(type="text", name="lastName", placeholder="Last name", required, autocomplete="family-name", value=lastNameValue)
+      label(for="lastName") Last name
+    div.integrated-label
+      input#password(type="password", name="password", placeholder="Password",required, autocomplete="new-password")
+      label(for="password") Password
+    div.integrated-label
+      input#confirmPassword(type="password", name="confirmPassword", placeholder="Confirm password", required, autocomplete="new-password")
+      label(for="confirmPassword") Confirm password
+    div.controls
+      button.primary(type="submit") Create account
+  p
+    | Already have an account? 
+    a(href="/login") Log in here.

@@ -1,0 +1,67 @@
+@use "../variables" as *;
+
+@media (min-width: 320px) and (max-width: 666px) {
+  body {
+    font-size: $fontSize * 0.9;
+    line-height: $lineHeight * 0.9;
+
+    & > main {
+      padding: $paragraphSpacer 0.5em;
+      max-width: 100vw;
+    }
+  }
+}
+
+@media (min-width: 667px) and (max-width: 900px) {
+  body {
+    font-size: $fontSize * 0.95;
+    line-height: $lineHeight * 0.95;
+
+    & > main {
+      padding: $paragraphSpacer 1em;
+      max-width: 100vw;
+    }
+  }
+}
+
+@media (min-width: 901px) {
+  body {
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    overflow-x: hidden;
+    font-size: $fontSize;
+    line-height: $lineHeight;
+
+    & .navbar > .menu > .knobs > .dropdown {
+      & > .knob {
+        background-color: $mainBackground;
+      }
+
+      & > .panel {
+        font-size: 1.2em;
+
+        & > ul > li > a {
+          padding-right: 4ch;
+        }
+      }
+    }
+
+    & > main {
+      padding: $paragraphSpacer 1em;
+      max-width: 100vw;
+    }
+
+    & > footer {
+      max-width: 100vw;
+      padding: 0.5em 1em 1.5em;
+      margin: 0 auto;
+      border-top: 1px solid $mainBackgroundLite;
+      text-align: right;
+
+      & > a {
+        margin-left: 0.8em;
+      }
+    }
+  }
+}

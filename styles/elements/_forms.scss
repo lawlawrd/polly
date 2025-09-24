@@ -1,0 +1,170 @@
+@use '../variables' as *;
+
+form {
+  margin: $paragraphSpacer 0;
+}
+
+fieldset {
+  border-width: 0;
+}
+
+legend {
+  font-size: 2em;
+  font-weight: 300;
+  margin: $paragraphSpacer 0;
+}
+
+label {
+  font-family: $utilityText;
+}
+
+.help {
+  margin-top: -1em;
+  color: $gray;
+  font-family: $utilityText;
+}
+
+.help input[type="checkbox"]+label:before,
+.help input[type="checkbox"]+label:after,
+.help input[type="radio"]+label:before,
+.help input[type="radio"]+label:after {
+  margin-top: 2px;
+}
+
+.help.error {
+  color: $inputLineError;
+}
+
+.group {
+  display: inline-flex;
+  margin: 0 0 0.4rem 0;
+
+  &>* {
+    border-radius: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: -1px;
+    flex: 0 0 auto;
+    position: relative;
+
+    &:first-child,
+    &.dropdown:first-child>*:first-child {
+      border-radius: 0;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+
+    &:last-child,
+    &.dropdown:last-child>*:first-child {
+      border-radius: 0;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+  }
+
+  &>input[type="date"],
+  &>input[type="datetime-local"],
+  &>input[type="email"],
+  &>input[type="month"],
+  &>input[type="number"],
+  &>input[type="password"],
+  &>input[type="search"],
+  &>input[type="tel"],
+  &>input[type="text"],
+  &>input[type="time"],
+  &>input[type="url"],
+  &>input[type="week"],
+  &>input:not([type]),
+  &>select,
+  &>.integrated-label,
+  &>.input-container {
+    flex: 1 0 auto;
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+
+    &.append-icon {
+      margin-right: calc((#{$inputHeight} * -0.7) - (#{$fontSize} * -0.3) - 1px);
+      padding-right: 2.5em;
+      background-position: calc(100% - 2em) center;
+
+      &:nth-last-child(2) {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+      &+.icon {
+        left: -0.6em;
+      }
+    }
+
+    &.prepend-icon {
+      margin-right: calc(2 * (#{$inputHeight} * -0.7) - (#{$fontSize} * -0.3) - 1px);
+
+      &+.icon {
+        left: -0.3em;
+      }
+    }
+  }
+
+  &>.icon {
+    font-size: $inputFontSize;
+    position: relative;
+    fill: $mainLine;
+    width: calc((#{$inputHeight} * 0.7) - (#{$fontSize} * 0.3));
+    height: $inputHeight;
+    left: 0.6em;
+    z-index: 1;
+    align-self: stretch;
+
+    &+.prepend-icon {
+      right: calc((#{$inputHeight} * 0.7) - (#{$fontSize} * 0.3) - 1px);
+      margin-right: calc((#{$inputHeight} * -0.7) - (#{$fontSize} * -0.3) - 1px);
+      padding-left: 2.5em;
+
+      &:nth-child(2) {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+    }
+  }
+
+  &:focus-within>.icon {
+    fill: $blue;
+  }
+
+  button:first-child+ :not(button),
+  .button:first-child+ :not(button) {
+    margin-left: 1px;
+  }
+
+  &>label {
+    font-size: $inputFontSize;
+    height: $inputHeight;
+    color: $mainText;
+    background-color: $inputBackgroundDisabled;
+    border: 1px solid $inputLine;
+    line-height: calc(#{$inputHeight} - 2px);
+    padding: 0 1em;
+
+    &:first-child {
+      border-right-width: 0;
+    }
+
+    .icon {
+      position: relative;
+      display: inline;
+      width: calc((#{$inputHeight} * 0.65) - (#{$fontSize} * 0.3));
+      height: calc((#{$inputHeight} * 0.65) - (#{$fontSize} * 0.3));
+      top: $inputHeight * 0.175;
+    }
+  }
+}
