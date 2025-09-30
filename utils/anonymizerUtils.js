@@ -30,7 +30,13 @@ export const applyAnonymizationToHtml = (
   entities,
   { entityTypeDisplayMap } = {},
 ) => {
-  if (typeof plainText === "string" && Array.isArray(entities)) {
+  let sanitizedHtml = typeof html === "string" ? html : "";
+
+  if (!Array.isArray(entities) || entities.length === 0) {
+    return sanitizedHtml;
+  }
+
+  if (typeof plainText === "string") {
     entities.forEach((entity) => {
       if (
         entity &&
@@ -43,8 +49,13 @@ export const applyAnonymizationToHtml = (
     });
   }
 
-  for (let i = entities.length - 1; i >= 0; i--) {
-    const entity = entities[i];
+  const sortedEntities = [...entities].sort((a, b) => {
+    const aLength = typeof a?.foundText === "string" ? a.foundText.length : 0;
+    const bLength = typeof b?.foundText === "string" ? b.foundText.length : 0;
+    return bLength - aLength;
+  });
+
+  sortedEntities.forEach((entity) => {
     if (
       entity &&
       typeof entity.foundText === "string" &&
@@ -63,9 +74,9 @@ export const applyAnonymizationToHtml = (
         "\\$&",
       );
       const regex = new RegExp(escapedFoundText, "g");
-      html = html.replace(regex, replacement);
+      sanitizedHtml = sanitizedHtml.replace(regex, replacement);
     }
-  }
+  });
 
-  return typeof html === "string" ? html : "";
+  return sanitizedHtml;
 };
